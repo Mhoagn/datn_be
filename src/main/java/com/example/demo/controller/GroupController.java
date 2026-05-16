@@ -58,4 +58,23 @@ public class GroupController {
         GroupResponse response = groupService.updateGroupAvatar(groupId, file);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/{groupId}/members")
+    public ResponseEntity<SliceResponse<GroupMemberResponse>> getGroupMembers(
+            @PathVariable Long groupId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        SliceResponse<GroupMemberResponse> response = groupService.getGroupMembers(groupId, page, size);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{groupId}/members/{userId}")
+    public ResponseEntity<KickMemberResponse> kickMember(
+            @PathVariable Long groupId,
+            @PathVariable Long userId
+    ) {
+        KickMemberResponse response = groupService.kickMember(groupId, userId);
+        return ResponseEntity.ok(response);
+    }
 }

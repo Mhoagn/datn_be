@@ -35,4 +35,16 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> 
 
     @Query("SELECT gm.user.id FROM GroupMember gm WHERE gm.group.id = :groupId AND gm.role IN :roles")
     List<Long> findUserIdsByGroupIdAndRoleIn(@Param("groupId") Long groupId, @Param("roles") List<GroupMember.Role> roles);
+
+    /**
+     * Lấy danh sách members của group với phân trang
+     * Chỉ lấy members đang active, sắp xếp theo joinedAt DESC
+     */
+    @Query("""
+        SELECT gm FROM GroupMember gm
+        JOIN FETCH gm.user u
+        WHERE gm.groupId = :groupId AND gm.isActive = true
+        ORDER BY gm.joinedAt DESC
+    """)
+    Slice<GroupMember> findActiveByGroupId(@Param("groupId") Long groupId, Pageable pageable);
 }

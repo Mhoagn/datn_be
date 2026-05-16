@@ -198,4 +198,97 @@ public class GroupService implements GroupInterface {
 
         return code.toString();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public SliceResponse<GroupMemberResponse> getGroupMembers(Long groupId, int page, int size) {
+        Long currentUserId = securityUtil.getCurrentUserId();
+
+        // 1. Validate group tồn tại
+        groupRepository.findById(groupId)
+                .orElseThrow(() -> new GroupNotFoundException("Nhóm không tồn tại"));
+
+        // 2. Validate user là owner của group
+        GroupMember currentMember = groupMemberRepository.findByUserIdAndGroupId(currentUserId, groupId)
+                .orElseThrow(() -> new UserNotInGroupException("Bạn không phải thành viên của nhóm"));
+
+        if (currentMember.getRole() != GroupMember.Role.OWNER) {
+            throw new UserIsNotOwnerException("Chỉ chủ nhóm mới có quyền xem danh sách thành viên");
+        }
+
+        // 3. Lấy danh sách members với phân trang
+        Pageable pageable = PageRequest.of(page, size);
+        Slice<GroupMember> memberSlice = groupMemberRepository.findActiveByGroupId(groupId, pageable);
+
+        // 4. Map sang DTO
+        List<GroupMemberResponse> content = memberSlice.getContent().stream()
+                .map(member -> GroupMemberResponse.builder()
+                        .id(member.getId())
+                        .userId(member.getUserId())
+                        .fullname(member.getUser().getFullname())
+                        .email(member.getUser().getEmail())
+                        .avatarUrl(member.getUser().getAvatarUrl())
+                        .role(member.getRole().name())
+                        .joinedAt(member.getJoinedAt())
+                        .isActive(member.getIsActive())
+                        .build())
+                .collect(Collectors.toList());
+
+        return SliceResponse.<GroupMemberResponse>builder()
+                .content(content)
+                .page(memberSlice.getNumber())
+                .size(memberSlice.getSize())
+                .hasNext(memberSlice.hasNext())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public KickMemberResponse kickMember(Long groupId, Long userId) {
+        Long currentUserId = securityUtil.getCurrentUserId();
+
+        // 1. Validate group tồn tại
+        groupRepository.findById(groupId)
+                .orElseThrow(() -> new GroupNotFoundException("Nhóm không tồn tại"));
+
+        // 2. Validate user hiện tại là owner
+        GroupMember currentMember = groupMemberRepository.findByUserIdAndGroupId(currentUserId, groupId)
+                .orElseThrow(() -> new UserNotInGroupException("Bạn không phải thành viên của nhóm"));
+
+        if (currentMember.getRole() != GroupMember.Role.OWNER) {
+            throw new UserIsNotOwnerException("Chỉ chủ nhóm mới có quyền kick thành viên");
+        }
+
+        // 3. Validate không thể kick chính mình
+        if (currentUserId.equals(userId)) {
+            throw new com.example.demo.exception.CannotKickSelfException("Không thể kick chính mình ra khỏi nhóm");
+        }
+
+        // 4. Tìm member cần kick
+        GroupMember memberToKick = groupMemberRepository.findByUserIdAndGroupId(userId, groupId)
+                .orElseThrow(() -> new UserNotInGroupException("Người dùng không ở trong nhóm"));
+
+        // 5. Validate không thể kick owner khác
+        if (memberToKick.getRole() == GroupMember.Role.OWNER) {
+            throw new com.example.demo.exception.CannotKickOwnerException("Không thể kick chủ nhóm");
+        }
+
+        // 6. Validate member đang active
+        if (!memberToKick.getIsActive()) {
+            throw new UserNotInGroupException("Người dùng đã rời khỏi nhóm");
+        }
+
+        // 7. Set isActive = false và leftAt
+        java.time.LocalDateTime leftAt = java.time.LocalDateTime.now();
+        memberToKick.setIsActive(false);
+        memberToKick.setLeftAt(leftAt);
+        groupMemberRepository.save(memberToKick);
+
+        return KickMemberResponse.builder()
+                .groupId(groupId)
+                .userId(userId)
+                .message("Đã kick thành viên ra khỏi nhóm thành công")
+                .leftAt(leftAt)
+                .build();
+    }
 }

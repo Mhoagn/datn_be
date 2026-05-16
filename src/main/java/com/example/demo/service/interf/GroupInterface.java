@@ -9,4 +9,6 @@ public interface GroupInterface {
     GroupResponse updateGroupAvatar(Long groupId, org.springframework.web.multipart.MultipartFile file) throws java.io.IOException;
     SliceResponse<MyGroupResponse> getMyGroups(int page, int size, String search);
     JoinCodeResponse getJoinCode(Long groudId);
+    SliceResponse<GroupMemberResponse> getGroupMembers(Long groupId, int page, int size);
+    KickMemberResponse kickMember(Long groupId, Long userId);
 }
