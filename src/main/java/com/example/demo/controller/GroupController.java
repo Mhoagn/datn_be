@@ -77,4 +77,10 @@ public class GroupController {
         KickMemberResponse response = groupService.kickMember(groupId, userId);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/{groupId}/leave")
+    public ResponseEntity<LeaveGroupResponse> leaveGroup(@PathVariable Long groupId) {
+        LeaveGroupResponse response = groupService.leaveGroup(groupId);
+        return ResponseEntity.ok(response);
+    }
 }

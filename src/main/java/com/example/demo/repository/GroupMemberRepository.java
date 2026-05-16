@@ -26,6 +26,7 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> 
     Slice<GroupMember> findByUserIdAndGroupName(Long userId, String search, Pageable pageable);
 
     boolean existsByUserIdAndGroupId(Long userId, Long groupId);
+    boolean existsByUserIdAndGroupIdAndIsActiveTrue(Long userId, Long groupId);
 
     @Query("SELECT gm.user.id FROM GroupMember gm WHERE gm.group.id = :groupId")
     List<Long> findUserIdsByGroupId(@Param("groupId") Long groupId);

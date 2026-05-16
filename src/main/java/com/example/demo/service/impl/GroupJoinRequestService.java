@@ -8,7 +8,6 @@ import com.example.demo.entity.GroupJoinRequest;
 import com.example.demo.entity.GroupMember;
 import com.example.demo.entity.User;
 import com.example.demo.event.JoinRequestEvent;
-import com.example.demo.event.NewMeetingEvent;
 import com.example.demo.event.NewMemberEvent;
 import com.example.demo.exception.*;
 import com.example.demo.repository.GroupJoinRequestRepository;
@@ -50,30 +49,46 @@ public class GroupJoinRequestService implements GroupJoinRequestInterface {
 
         Long joinGroupId = joinGroup.getId();
 
-        if (groupMemberRepository.existsByUserIdAndGroupId(currentUserId, joinGroupId)) {
+        if (groupMemberRepository.existsByUserIdAndGroupIdAndIsActiveTrue(currentUserId, joinGroupId)) {
             throw new UserIsMemberException("Người dùng đã là thành viên của nhóm đó");
         }
 
-        if (groupJoinRequestRepository.existsByGroupIdAndUserId(joinGroupId, currentUserId)) {
-            throw new JoinRequestIsPendingException("Bạn đã gửi yêu cầu tham gia nhóm này rồi.");
+        // Kiểm tra xem đã có request cũ chưa
+        Optional<GroupJoinRequest> existingRequest = groupJoinRequestRepository.findByGroupIdAndUserId(joinGroupId, currentUserId);
+        
+        GroupJoinRequest req;
+        if (existingRequest.isPresent()) {
+            req = existingRequest.get();
+            
+            // Nếu request đang PENDING thì không cho gửi lại
+            if (req.getStatus() == GroupJoinRequest.Status.PENDING) {
+                throw new JoinRequestIsPendingException("Bạn đã gửi yêu cầu tham gia nhóm này rồi.");
+            }
+            
+            // Nếu request đã được xử lý (APPROVED/REJECTED), reset lại thành PENDING
+            req.setStatus(GroupJoinRequest.Status.PENDING);
+            req.setReviewer(null);
+            req.setReviewedAt(null);
+            
+            if (joinGroupRequest.getMessage() != null && !joinGroupRequest.getMessage().isBlank()) {
+                req.setMessage(joinGroupRequest.getMessage().trim());
+            } else {
+                req.setMessage(null);
+            }
+        } else {
+            // Tạo request mới
+            req = new GroupJoinRequest();
+            req.setStatus(GroupJoinRequest.Status.PENDING);
+            
+            if (joinGroupRequest.getMessage() != null && !joinGroupRequest.getMessage().isBlank()) {
+                req.setMessage(joinGroupRequest.getMessage().trim());
+            }
+            
+            req.setGroup(joinGroup);
+            req.setUser(currentUser);
         }
 
-        GroupJoinRequest req = new GroupJoinRequest();
-        req.setStatus(GroupJoinRequest.Status.PENDING);
-
-        if (joinGroupRequest.getMessage() != null && !joinGroupRequest.getMessage().isBlank()) {
-            req.setMessage(joinGroupRequest.getMessage().trim());
-        }
-
-        req.setGroup(joinGroup);
-        req.setUser(currentUser);
-
-        GroupJoinRequest saved;
-        try {
-            saved = groupJoinRequestRepository.save(req);
-        } catch (org.springframework.dao.DataIntegrityViolationException e) {
-            throw new JoinRequestIsPendingException("Bạn đã gửi yêu cầu tham gia nhóm này rồi.");
-        }
+        GroupJoinRequest saved = groupJoinRequestRepository.save(req);
         eventPublisher.publishEvent(new JoinRequestEvent(currentUserId,joinGroup.getId(), saved.getId()));
 
         return JoinRequestResponse.builder()
@@ -89,6 +104,7 @@ public class GroupJoinRequestService implements GroupJoinRequestInterface {
                 .reviewerName(saved.getReviewer() != null ? saved.getReviewer().getFullname() : null)
                 .reviewedAt(saved.getReviewedAt())
                 .createdAt(saved.getCreatedAt())
+                .updatedAt(saved.getUpdatedAt())
                 .build();
     }
 
@@ -121,6 +137,7 @@ public class GroupJoinRequestService implements GroupJoinRequestInterface {
                         .reviewerName(req.getReviewer() != null ? req.getReviewer().getFullname() : null)
                         .reviewedAt(req.getReviewedAt())
                         .createdAt(req.getCreatedAt())
+                        .updatedAt(req.getUpdatedAt())
                         .build())
                 .toList();
     }
@@ -169,13 +186,29 @@ public class GroupJoinRequestService implements GroupJoinRequestInterface {
                 throw new UserNotFoundException("Không xác định được user của request.");
             }
 
-            boolean alreadyMember = groupMemberRepository.existsByUserIdAndGroupId(targetUserId, groupId);
-            if (!alreadyMember) {
+            // Kiểm tra xem user đã có record GroupMember chưa (bất kể isActive)
+            Optional<GroupMember> existingMember = groupMemberRepository.findByUserIdAndGroupId(targetUserId, groupId);
+            
+            if (existingMember.isPresent()) {
+                // Nếu đã có record, kiểm tra isActive
+                GroupMember member = existingMember.get();
+                if (!member.getIsActive()) {
+                    // Nếu đã rời nhóm (isActive = false), kích hoạt lại
+                    member.setIsActive(true);
+                    member.setJoinedAt(java.time.LocalDateTime.now());
+                    groupMemberRepository.save(member);
+                    
+                    // Send WebSocket Notification
+                    groupWebSocketService.notifyUserGroupJoined(targetUserId, groupId, req.getGroup().getGroupName());
+                }
+                // Nếu isActive = true thì không làm gì (đã là member active rồi)
+            } else {
+                // Nếu chưa có record, tạo mới
                 GroupMember newMember = new GroupMember();
                 newMember.setRole(GroupMember.Role.MEMBER);
                 newMember.setIsActive(true);
 
-                // Set relationship (khuyên dùng)
+                // Set relationship
                 newMember.setUser(req.getUser());
                 newMember.setGroup(req.getGroup());
 
@@ -188,7 +221,7 @@ public class GroupJoinRequestService implements GroupJoinRequestInterface {
 
         GroupJoinRequest saved = groupJoinRequestRepository.save(req);
 
-        eventPublisher.publishEvent(new NewMemberEvent(currentUserId,req.getGroupId(),req.getUserId()));
+        eventPublisher.publishEvent(new NewMemberEvent(req.getUserId(), req.getGroupId(), req.getUserId()));
 
         // 8) Map response
         return JoinRequestResponse.builder()
@@ -204,6 +237,7 @@ public class GroupJoinRequestService implements GroupJoinRequestInterface {
                 .reviewerName(saved.getReviewer() != null ? saved.getReviewer().getFullname() : null)
                 .reviewedAt(saved.getReviewedAt())
                 .createdAt(saved.getCreatedAt())
+                .updatedAt(saved.getUpdatedAt())
                 .build();
     }
 }

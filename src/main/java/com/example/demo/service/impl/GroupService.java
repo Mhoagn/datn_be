@@ -291,4 +291,41 @@ public class GroupService implements GroupInterface {
                 .leftAt(leftAt)
                 .build();
     }
+
+    @Override
+    @Transactional
+    public LeaveGroupResponse leaveGroup(Long groupId) {
+        Long currentUserId = securityUtil.getCurrentUserId();
+
+        // 1. Validate group tồn tại
+        groupRepository.findById(groupId)
+                .orElseThrow(() -> new GroupNotFoundException("Nhóm không tồn tại"));
+
+        // 2. Tìm member hiện tại trong group
+        GroupMember currentMember = groupMemberRepository.findByUserIdAndGroupId(currentUserId, groupId)
+                .orElseThrow(() -> new UserNotInGroupException("Bạn không phải thành viên của nhóm"));
+
+        // 3. Validate không phải là OWNER
+        if (currentMember.getRole() == GroupMember.Role.OWNER) {
+            throw new com.example.demo.exception.OwnerCannotLeaveGroupException("Chủ nhóm không thể rời khỏi nhóm");
+        }
+
+        // 4. Validate member đang active
+        if (!currentMember.getIsActive()) {
+            throw new UserNotInGroupException("Bạn đã rời khỏi nhóm trước đó");
+        }
+
+        // 5. Set isActive = false và leftAt
+        java.time.LocalDateTime leftAt = java.time.LocalDateTime.now();
+        currentMember.setIsActive(false);
+        currentMember.setLeftAt(leftAt);
+        groupMemberRepository.save(currentMember);
+
+        return LeaveGroupResponse.builder()
+                .groupId(groupId)
+                .userId(currentUserId)
+                .message("Bạn đã rời khỏi nhóm thành công")
+                .leftAt(leftAt)
+                .build();
+    }
 }

@@ -11,4 +11,5 @@ public interface GroupInterface {
     JoinCodeResponse getJoinCode(Long groudId);
     SliceResponse<GroupMemberResponse> getGroupMembers(Long groupId, int page, int size);
     KickMemberResponse kickMember(Long groupId, Long userId);
+    LeaveGroupResponse leaveGroup(Long groupId);
 }

@@ -491,4 +491,18 @@ public class GlobalExceptionHandler {
                 .build();
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
     }
+
+    @ExceptionHandler(OwnerCannotLeaveGroupException.class)
+    public ResponseEntity<ErrorResponse> handleOwnerCannotLeaveGroup(
+            OwnerCannotLeaveGroupException ex,
+            HttpServletRequest request
+    ) {
+        ErrorResponse error = ErrorResponse.builder()
+                .message(ex.getMessage())
+                .status(HttpStatus.FORBIDDEN.value())
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+    }
 }

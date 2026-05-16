@@ -23,4 +23,5 @@ public class JoinRequestResponse {
     private String reviewerName;
     private LocalDateTime reviewedAt;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
