@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +48,18 @@ public class TranscriptController {
             @PathVariable Long pointId,
             @RequestBody @Valid UpdatePointSelectionRequest request) {
         SummaryPointDTO updated = transcriptService.updatePointSelection(pointId, request.getIsSelected());
+        return ResponseEntity.ok(updated);
+    }
+    
+    /**
+     * Cập nhật nội dung của một điểm tóm tắt
+     * PATCH /transcripts/points/{pointId}/content
+     */
+    @PatchMapping("/points/{pointId}/content")
+    public ResponseEntity<SummaryPointDTO> updatePointContent(
+            @PathVariable Long pointId,
+            @RequestBody @Valid UpdatePointContentRequest request) {
+        SummaryPointDTO updated = transcriptService.updatePointContent(pointId, request.getContent());
         return ResponseEntity.ok(updated);
     }
     

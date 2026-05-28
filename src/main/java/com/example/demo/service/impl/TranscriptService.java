@@ -360,6 +360,29 @@ public class TranscriptService {
     }
     
     /**
+     * Cập nhật nội dung của một điểm tóm tắt
+     */
+    @Transactional
+    public SummaryPointDTO updatePointContent(Long pointId, String content) {
+        log.info("Cập nhật nội dung cho point ID: {}", pointId);
+        
+        MeetingSummaryPoint point = summaryPointRepository.findById(pointId)
+                .orElseThrow(() -> new RuntimeException("Point không tồn tại"));
+        
+        point.setContent(content);
+        MeetingSummaryPoint updated = summaryPointRepository.save(point);
+        
+        log.info("Cập nhật nội dung thành công");
+        
+        return new SummaryPointDTO(
+            updated.getId(),
+            updated.getContent(),
+            updated.getOrderIndex(),
+            updated.getIsSelected()
+        );
+    }
+    
+    /**
      * Lưu final summary (người dùng chọn các điểm và tạo tóm tắt cuối cùng)
      */
     @Transactional
