@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"candidate"})
-public class MeetingSummaryPoint {
+public class    MeetingSummaryPoint {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
