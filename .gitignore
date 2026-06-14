@@ -3,7 +3,10 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-**/src/main/resources/application.properties
+
+# Không push file dev (chứa credentials thật)
+**/src/main/resources/application-dev.properties
+
 ### STS ###
 .apt_generated
 .classpath
@@ -31,3 +34,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Environment ###
+.env
+.env.local
