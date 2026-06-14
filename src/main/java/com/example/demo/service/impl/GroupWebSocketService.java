@@ -59,7 +59,39 @@ public class GroupWebSocketService {
         
         log.info("Broadcasted meeting update to group {}", groupId);
     }
-    
+
+    // Broadcast khi bắt đầu record đến tất cả participants trong meeting
+    public void broadcastRecordStarted(Long groupId, Long meetingId, Long recordedBy) {
+        RecordBroadcast broadcast = RecordBroadcast.builder()
+                .type("RECORD_STARTED")
+                .meetingId(meetingId)
+                .recordedBy(recordedBy)
+                .timestamp(LocalDateTime.now())
+                .message("Cuộc họp đang được ghi lại")
+                .build();
+
+        String destination = "/topic/meeting." + meetingId;
+        messagingTemplate.convertAndSend(destination, broadcast);
+
+        log.info("Broadcasted record started for meeting {} in group {}", meetingId, groupId);
+    }
+
+    // Broadcast khi dừng record đến tất cả participants trong meeting
+    public void broadcastRecordStopped(Long groupId, Long meetingId, Long recordedBy) {
+        RecordBroadcast broadcast = RecordBroadcast.builder()
+                .type("RECORD_STOPPED")
+                .meetingId(meetingId)
+                .recordedBy(recordedBy)
+                .timestamp(LocalDateTime.now())
+                .message("Cuộc họp đã dừng ghi lại")
+                .build();
+
+        String destination = "/topic/meeting." + meetingId;
+        messagingTemplate.convertAndSend(destination, broadcast);
+
+        log.info("Broadcasted record stopped for meeting {} in group {}", meetingId, groupId);
+    }
+
     @Data
     @Builder
     @NoArgsConstructor
@@ -67,6 +99,18 @@ public class GroupWebSocketService {
     public static class MeetingBroadcast {
         private String type;
         private Object meeting;
+        private LocalDateTime timestamp;
+    }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class RecordBroadcast {
+        private String type;
+        private Long meetingId;
+        private Long recordedBy;
+        private String message;
         private LocalDateTime timestamp;
     }
 

@@ -318,7 +318,11 @@ public class MeetingService implements MeetingInterface {
 
         record = meetingRecordRepository.save(record);
 
-        // 7. Trả về response
+        // 7. Notify WebSocket cho tất cả participants trong meeting
+        groupWebSocketService.broadcastRecordStarted(
+                meeting.getGroup().getId(), meetingId, currentUserId);
+
+        // 8. Trả về response
         return meetingRecordMapper.toRecordResponse(record);
     }
 
@@ -377,7 +381,11 @@ public class MeetingService implements MeetingInterface {
             transcriptService.processRecordedVideo(record.getId());
         }
 
-        // 10. Trả về response
+        // 10. Notify WebSocket cho tất cả participants trong meeting
+        groupWebSocketService.broadcastRecordStopped(
+                meeting.getGroup().getId(), meetingId, currentUserId);
+
+        // 11. Trả về response
         return meetingRecordMapper.toRecordStopResponse(record);
     }
 
