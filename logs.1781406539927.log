@@ -1,0 +1,650 @@
+2026-06-14T03:06:44.009312118Z [inf]  Starting Container
+2026-06-14T03:06:45.957464766Z [inf]  
+2026-06-14T03:06:45.957471978Z [inf]  2026-06-14T03:06:44.902Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:06:45.957475733Z [inf]  2026-06-14T03:06:44.906Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:06:45.957487367Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:06:45.957488895Z [inf]  
+2026-06-14T03:06:45.957494135Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:06:45.957499617Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:06:45.957500476Z [inf]  
+2026-06-14T03:06:45.957504647Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:06:45.957509094Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:06:45.957509463Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:06:45.957515213Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:06:49.637611659Z [inf]  2026-06-14T03:06:49.635Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:06:54.311144268Z [inf]  2026-06-14T03:06:54.306Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:06:54.333380441Z [inf]  2026-06-14T03:06:54.325Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:06:54.333385042Z [inf]  
+2026-06-14T03:06:54.333388690Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:06:54.333392407Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.333396364Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.333399940Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.333403461Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.333407119Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.333412322Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.333415877Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.333419519Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.334429786Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.334437354Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.334441769Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.334445653Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.334449610Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.334453731Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:06:54.334457486Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:06:54.334461469Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:06:54.334465984Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:06:54.334469726Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:06:54.334473447Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:06:54.335569122Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:06:54.335572891Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:06:54.335576869Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:06:54.335580191Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:06:54.335583800Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:06:54.335587505Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:06:54.335591026Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:06:54.335594690Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.335598364Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.335601909Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.335605557Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.335609235Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.336526798Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.336535207Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.336538732Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.336541606Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.336545109Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.336548406Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.336551818Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.336555297Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.336558538Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:06:54.336561937Z [inf]  	... 24 common frames omitted
+2026-06-14T03:06:54.336565110Z [inf]  
+2026-06-14T03:06:57.009405418Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:06:57.009413958Z [inf]  
+2026-06-14T03:06:57.009482782Z [inf]  
+2026-06-14T03:06:57.009485896Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:06:57.009489015Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:06:57.009491961Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:06:57.009494833Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:06:57.009498831Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:06:57.009501795Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:06:57.009504583Z [inf]  
+2026-06-14T03:06:57.015515339Z [inf]  2026-06-14T03:06:56.996Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:06:57.016907171Z [inf]  2026-06-14T03:06:57.015Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:07:01.420490132Z [inf]  2026-06-14T03:07:01.418Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:07:04.039372158Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.039379568Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.039384066Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.039392727Z [inf]  
+2026-06-14T03:07:04.039399660Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:04.039404880Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.039408274Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.039411657Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.039431723Z [inf]  2026-06-14T03:07:03.923Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:04.039438374Z [inf]  2026-06-14T03:07:03.943Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:07:04.040096198Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:04.040100327Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.040103716Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.040106973Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.040110032Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.040113618Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.040117151Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.040120491Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.040123774Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:04.040127066Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:04.040130594Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:04.041648579Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.041655755Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.041671720Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:04.041675909Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:04.041680101Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:07:04.041683844Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:07:04.041687503Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:07:04.041691923Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:04.041695429Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:04.041698589Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:04.041701750Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:07:04.041704479Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.041707593Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.042945397Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.042953896Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.042956741Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.042960615Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.042963208Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.042967347Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.042971056Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.042983279Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.042988480Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.042992898Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:04.044463973Z [inf]  	... 24 common frames omitted
+2026-06-14T03:07:04.044467379Z [inf]  
+2026-06-14T03:07:06.371034291Z [inf]  
+2026-06-14T03:07:06.371039785Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:07:06.371045603Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:07:06.371050203Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:07:06.371055249Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:07:06.371060157Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:07:06.371064715Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:07:06.371068935Z [inf]  
+2026-06-14T03:07:06.371075826Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:07:06.371080478Z [inf]  
+2026-06-14T03:07:06.538685896Z [inf]  2026-06-14T03:07:06.528Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:07:06.538688829Z [inf]  2026-06-14T03:07:06.532Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:07:11.053828597Z [inf]  2026-06-14T03:07:10.923Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:07:13.398547666Z [inf]  2026-06-14T03:07:13.393Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:13.438997690Z [inf]  2026-06-14T03:07:13.435Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:07:13.439004872Z [inf]  
+2026-06-14T03:07:13.439008867Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:13.439014774Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.439018155Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.439021927Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.439025190Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.439028776Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.439031882Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.439035276Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.439038509Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.440107749Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.440113311Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.440116860Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.440122203Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.440125349Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.440128548Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:13.440132686Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:13.440135997Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:13.440139742Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:13.440143569Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:13.440147321Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:13.441634643Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:07:13.441639564Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:07:13.441642689Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:07:13.441645450Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:13.441648375Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:13.441651527Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:13.441654609Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:07:13.441657712Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.441669274Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.441672927Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.441675833Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.441678809Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.443128736Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.443132209Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.443135377Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.443138453Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.443141287Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.443144314Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.443148153Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.443151081Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.443153984Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:13.443156856Z [inf]  	... 24 common frames omitted
+2026-06-14T03:07:13.443160044Z [inf]  
+2026-06-14T03:07:16.070704071Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:07:16.070710103Z [inf]  
+2026-06-14T03:07:16.070714546Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:07:16.070717997Z [inf]  
+2026-06-14T03:07:16.070721269Z [inf]  2026-06-14T03:07:15.943Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:07:16.070724411Z [inf]  2026-06-14T03:07:15.948Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:07:16.070801440Z [inf]  
+2026-06-14T03:07:16.070806431Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:07:16.070810300Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:07:16.070814747Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:07:16.070820372Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:07:16.070825326Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:07:21.110117881Z [inf]  2026-06-14T03:07:20.746Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:07:23.445915848Z [inf]  2026-06-14T03:07:23.444Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:23.498225104Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.498228139Z [inf]  2026-06-14T03:07:23.491Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:07:23.498234440Z [inf]  
+2026-06-14T03:07:23.498239229Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:23.498243784Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.498248596Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.498253857Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.498258357Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.498262801Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.498267394Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.498271612Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.499359872Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.499366681Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.499370790Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.499374947Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.499379754Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.499384275Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:23.499387879Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:23.499391854Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:23.499396142Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:23.499400095Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:23.499404954Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:23.500644727Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.500650905Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.500658147Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.500660931Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:07:23.500666107Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:07:23.500667240Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.500670700Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:07:23.500676296Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:23.500681079Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:23.500684303Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:23.500687893Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:07:23.500691048Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.501986475Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.501993175Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.501997041Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.502000729Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.502005441Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.502010866Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.502015753Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.502019764Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.502026381Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:23.502030042Z [inf]  	... 24 common frames omitted
+2026-06-14T03:07:23.502034010Z [inf]  
+2026-06-14T03:07:25.746958435Z [inf]  
+2026-06-14T03:07:25.746962575Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:07:25.746966614Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:07:25.746970401Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:07:25.746974158Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:07:25.746977472Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:07:25.746980966Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:07:25.746984438Z [inf]  
+2026-06-14T03:07:25.746988169Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:07:25.746991518Z [inf]  
+2026-06-14T03:07:26.080551076Z [inf]  2026-06-14T03:07:25.933Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:07:26.080556087Z [inf]  2026-06-14T03:07:25.939Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:07:30.267358725Z [inf]  2026-06-14T03:07:30.266Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:07:33.110160108Z [inf]  2026-06-14T03:07:32.908Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:33.110165004Z [inf]  2026-06-14T03:07:32.944Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:07:33.110168496Z [inf]  
+2026-06-14T03:07:33.110171878Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:33.110174719Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.110177417Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.110180343Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.110183566Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.110186829Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.110190218Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.111183216Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.111186967Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.111191725Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.111197268Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.111202031Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.111206243Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.111211220Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.111216924Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:33.111221274Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:33.111224967Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:33.111228640Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:33.112089891Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.112098898Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.112103343Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:33.112107719Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.112109224Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:33.112113488Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.112115624Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:07:33.112121118Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:07:33.112124480Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:07:33.112127830Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:33.112131373Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:33.112134699Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:33.112137847Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:07:33.113381653Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.113385870Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.113388673Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.113391407Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.113394328Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.113397060Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.113399835Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.113402425Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.113404923Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.113407691Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:33.114638031Z [inf]  	... 24 common frames omitted
+2026-06-14T03:07:33.114643046Z [inf]  
+2026-06-14T03:07:35.332062705Z [inf]  
+2026-06-14T03:07:35.332070037Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:07:35.332073734Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:07:35.332076939Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:07:35.332080239Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:07:35.332083718Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:07:35.332086960Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:07:35.332089928Z [inf]  
+2026-06-14T03:07:35.332092870Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:07:35.332098145Z [inf]  
+2026-06-14T03:07:35.525655904Z [inf]  2026-06-14T03:07:35.482Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:07:35.525659295Z [inf]  2026-06-14T03:07:35.524Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:07:40.115410505Z [inf]  2026-06-14T03:07:39.978Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:07:42.603145821Z [inf]  2026-06-14T03:07:42.602Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:42.646387970Z [inf]  2026-06-14T03:07:42.638Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:07:42.646391545Z [inf]  
+2026-06-14T03:07:42.646394437Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:42.646397197Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.646401232Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.646404150Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.646406951Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.646409709Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.646412526Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.646415223Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.646417873Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.647336663Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.647341084Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.647343817Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.647346565Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.647349808Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.647353952Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:42.647356611Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:42.647359490Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:42.647362390Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:42.647365380Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:42.647368163Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:42.648851204Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:07:42.648856658Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:07:42.648860795Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:07:42.648866086Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:42.648871012Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:42.648874407Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:42.648877800Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:07:42.648882194Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.648885482Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.648888662Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.648891732Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.648894869Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.649904920Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.649911399Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.649915490Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.649919558Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.649924099Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.649928438Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.649932718Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.649936535Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.649940858Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:42.649946110Z [inf]  	... 24 common frames omitted
+2026-06-14T03:07:42.649950039Z [inf]  
+2026-06-14T03:07:45.129528649Z [inf]  
+2026-06-14T03:07:45.129532344Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:07:45.129535698Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:07:45.129540106Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:07:45.129543471Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:07:45.129546343Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:07:45.129549896Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:07:45.129554073Z [inf]  
+2026-06-14T03:07:45.129558203Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:07:45.129562419Z [inf]  
+2026-06-14T03:07:45.310021625Z [inf]  2026-06-14T03:07:45.303Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:07:45.310025663Z [inf]  2026-06-14T03:07:45.307Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:07:50.162205297Z [inf]  2026-06-14T03:07:49.861Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:07:52.429651338Z [inf]  2026-06-14T03:07:52.426Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:52.486696771Z [inf]  2026-06-14T03:07:52.448Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:07:52.486700019Z [inf]  
+2026-06-14T03:07:52.486703117Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:07:52.486705922Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.486708480Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.486711048Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.486714179Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.486717703Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.486720428Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.486723037Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.486732226Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.487494988Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.487498366Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.487501497Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.487504387Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.487507306Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.487510257Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:52.487513118Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:52.487515898Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:52.487518656Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:52.487521447Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:52.487524324Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:07:52.488620145Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:07:52.488623352Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:07:52.488626566Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:07:52.488629516Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:52.488632415Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:52.488635803Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:07:52.488638540Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:07:52.488641195Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.488643821Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.488648123Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.488650723Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.488653933Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.489742401Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.489746295Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.489750963Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.489753902Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.489756621Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.489759530Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.489762462Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.489765616Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.489768229Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:07:52.489770885Z [inf]  	... 24 common frames omitted
+2026-06-14T03:07:52.489773449Z [inf]  
+2026-06-14T03:07:55.181185230Z [inf]  2026-06-14T03:07:55.109Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:07:55.181195451Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:07:55.181203475Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:07:55.181208404Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:07:55.181213202Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:07:55.181218220Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:07:55.181224179Z [inf]  
+2026-06-14T03:07:55.181232366Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:07:55.181236928Z [inf]  
+2026-06-14T03:07:55.181242067Z [inf]  2026-06-14T03:07:55.062Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:07:55.181303929Z [inf]  
+2026-06-14T03:07:55.181307325Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:07:59.481853163Z [inf]  2026-06-14T03:07:59.481Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:08:02.218180219Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218189179Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218198577Z [inf]  
+2026-06-14T03:08:02.218202899Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218208859Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:08:02.218211787Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218218721Z [inf]  2026-06-14T03:08:02.012Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:08:02.218225240Z [inf]  2026-06-14T03:08:02.035Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:08:02.218227632Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218232656Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218549829Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218555717Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:02.218559505Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:02.218562710Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:02.218565832Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:02.218587339Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218590854Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218594222Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218597284Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218600866Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.218604503Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.219615343Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:08:02.219620042Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:02.219624084Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:02.219628326Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:02.219632173Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:08:02.219645785Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:02.219649442Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:02.219652200Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:08:02.219655303Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:08:02.219739102Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.219743399Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.219747399Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.219751167Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.220769895Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.220777215Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.220780794Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.220784517Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.220788731Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.220792785Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.220796697Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.220800483Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.220803866Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.220807402Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:02.222041890Z [inf]  	... 24 common frames omitted
+2026-06-14T03:08:02.222045975Z [inf]  
+2026-06-14T03:08:04.456119043Z [inf]  
+2026-06-14T03:08:04.456122710Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:08:04.456126339Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:08:04.456129454Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:08:04.456132128Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:08:04.456135200Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:08:04.456137959Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:08:04.456140709Z [inf]  
+2026-06-14T03:08:04.456143521Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:08:04.456146609Z [inf]  
+2026-06-14T03:08:04.578458780Z [inf]  2026-06-14T03:08:04.572Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:08:04.578461767Z [inf]  2026-06-14T03:08:04.576Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:08:08.907172620Z [inf]  2026-06-14T03:08:08.905Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:08:11.448770803Z [inf]  2026-06-14T03:08:11.393Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:08:11.475947294Z [inf]  2026-06-14T03:08:11.467Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:08:11.475952259Z [inf]  
+2026-06-14T03:08:11.475955610Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:08:11.475960134Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.475963227Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.475966597Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.475970695Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.475973487Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.475976225Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.475979081Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.475981838Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.477524035Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.477527802Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.477530799Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.477533719Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.477536594Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.477539904Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:11.477543742Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:11.477546416Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:11.477548938Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:11.477551520Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:11.477554164Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:11.478857475Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:08:11.478865140Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:08:11.478870311Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:08:11.478874429Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:11.478880746Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:11.478884514Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:11.478888159Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:08:11.478891890Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.478895556Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.478901491Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.478904819Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.478908189Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.480317205Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.480321669Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.480325500Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.480330509Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.480334714Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.480337949Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.480342603Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.480345806Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.480348736Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:11.480352938Z [inf]  	... 24 common frames omitted
+2026-06-14T03:08:11.480356630Z [inf]  
+2026-06-14T03:08:13.863472743Z [inf]  
+2026-06-14T03:08:13.863476689Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:08:13.863480622Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:08:13.863484579Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:08:13.863488450Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:08:13.863493133Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:08:13.863496740Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:08:13.863500973Z [inf]  
+2026-06-14T03:08:13.863504876Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:08:13.863508942Z [inf]  
+2026-06-14T03:08:14.274260950Z [inf]  2026-06-14T03:08:14.049Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:08:14.274265061Z [inf]  2026-06-14T03:08:14.053Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:08:18.442974192Z [inf]  2026-06-14T03:08:18.441Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:08:21.246413143Z [inf]  
+2026-06-14T03:08:21.246419643Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:08:21.246424197Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246431410Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246434920Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246440092Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246442409Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246448269Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246505253Z [inf]  2026-06-14T03:08:20.981Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:08:21.246509322Z [inf]  2026-06-14T03:08:21.053Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:08:21.246865509Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246871646Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246875176Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246878646Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246881992Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:21.246885289Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:21.246888582Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:21.246891731Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:21.246934292Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246937825Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.246941603Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.247640728Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:21.247644589Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:21.247647534Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:08:21.247650719Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:08:21.247653550Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:08:21.247656604Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:21.247659574Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:21.247662271Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:21.247665171Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:08:21.247667977Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.247670560Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.247673168Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.247675797Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.248676130Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.248680219Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.248683615Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.248686809Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.248689859Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.248692654Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.248695554Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.248699469Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.248702186Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.248705098Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:21.249845247Z [inf]  	... 24 common frames omitted
+2026-06-14T03:08:21.249850130Z [inf]  
+2026-06-14T03:08:23.487845274Z [inf]  
+2026-06-14T03:08:23.487850228Z [inf]    .   ____          _            __ _ _
+2026-06-14T03:08:23.487855102Z [inf]   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-06-14T03:08:23.487860605Z [inf]  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-06-14T03:08:23.487865253Z [inf]   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-06-14T03:08:23.487869152Z [inf]    '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-06-14T03:08:23.487873679Z [inf]   =========|_|==============|___/=/_/_/_/
+2026-06-14T03:08:23.487879527Z [inf]  
+2026-06-14T03:08:23.487884090Z [inf]   :: Spring Boot ::                (v4.0.3)
+2026-06-14T03:08:23.487893135Z [inf]  
+2026-06-14T03:08:23.668259350Z [inf]  2026-06-14T03:08:23.663Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : Starting DatnBackendApplication v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app/target/datn-backend-0.0.1-SNAPSHOT.jar started by root in /app)
+2026-06-14T03:08:23.668262396Z [inf]  2026-06-14T03:08:23.667Z  INFO 1 --- [datn-backend] [           main] c.example.demo.DatnBackendApplication    : The following 1 profile is active: "prod"
+2026-06-14T03:08:28.305446378Z [inf]  2026-06-14T03:08:28.191Z  WARN 1 --- [datn-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-14T03:08:30.686256809Z [inf]  2026-06-14T03:08:30.684Z  WARN 1 --- [datn-backend] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:08:30.771087467Z [inf]  2026-06-14T03:08:30.764Z ERROR 1 --- [datn-backend] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-06-14T03:08:30.771091842Z [inf]  
+2026-06-14T03:08:30.771095591Z [inf]  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityConfig': Injection of autowired dependencies failed
+2026-06-14T03:08:30.771099334Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:499) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.771102999Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.771107895Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.771111117Z [inf]  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.771115904Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.771119438Z [inf]  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.771122767Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.771126395Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.772421235Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:30.772438884Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.772442073Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.772444818Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.772447512Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.772450367Z [inf]  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.772454085Z [inf]  	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:30.772457176Z [inf]  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:30.772459920Z [inf]  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:30.772463613Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:30.772466405Z [inf]  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-06-14T03:08:30.773636362Z [inf]  	at com.example.demo.DatnBackendApplication.main(DatnBackendApplication.java:13) ~[!/:0.0.1-SNAPSHOT]
+2026-06-14T03:08:30.773640043Z [inf]  	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+2026-06-14T03:08:30.773643151Z [inf]  	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+2026-06-14T03:08:30.773646348Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:30.773649623Z [inf]  	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:30.773653058Z [inf]  	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[datn-backend-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+2026-06-14T03:08:30.773656248Z [inf]  Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'CORS_ALLOWED_ORIGIN' in value "${CORS_ALLOWED_ORIGIN}" <-- "${app.cors.allowed-origin}"
+2026-06-14T03:08:30.773659757Z [inf]  	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.773663506Z [inf]  	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.773666760Z [inf]  	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.773669832Z [inf]  	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.773672896Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.774976519Z [inf]  	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.774977369Z [inf]  
+2026-06-14T03:08:30.774981690Z [inf]  	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.774986488Z [inf]  	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.774986558Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:764) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.774991142Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:748) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.774991648Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.774995545Z [inf]  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.774995795Z [inf]  	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.774999635Z [inf]  	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:493) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-06-14T03:08:30.775003560Z [inf]  	... 24 common frames omitted
