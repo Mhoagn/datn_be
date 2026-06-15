@@ -87,6 +87,7 @@ public class PostCommentService implements PostCommentInterface {
     }
     
     @Override
+    @Transactional(readOnly = true)
     public List<PostCommentResponse> getCommentsByPostId(Long postId) {
         postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException("Bài viết không tồn tại"));
