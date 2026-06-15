@@ -133,6 +133,7 @@ public class GroupService implements GroupInterface {
 
 
     @Override
+    @Transactional(readOnly = true)
     public SliceResponse<MyGroupResponse> getMyGroups(int page, int size, String search) {
         Long currentUserId = securityUtil.getCurrentUserId();
 
