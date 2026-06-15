@@ -27,6 +27,7 @@ public class ProfileService implements ProfileInterface {
     private final BCryptPasswordEncoder encoder;
     
     @Override
+    @Transactional(readOnly = true)
     public ProfileResponse getMyProfile() {
         User user = securityUtil.getCurrentUser();
         return buildProfileResponse(user);

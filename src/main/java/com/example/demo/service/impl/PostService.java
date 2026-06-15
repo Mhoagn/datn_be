@@ -334,6 +334,7 @@ public class PostService implements PostInterface {
 
     
     @Override
+    @Transactional(readOnly = true)
     public List<PostResponse> getActivePostInGroup(Long groupId) {
         Long currentUserId = securityUtil.getCurrentUserId();
         Group group = groupRepository.findById(groupId)

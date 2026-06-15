@@ -109,6 +109,7 @@ public class GroupJoinRequestService implements GroupJoinRequestInterface {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<JoinRequestResponse> getAllJoinGroupRequest(Long groupId) {
         Long currentUserId = securityUtil.getCurrentUserId();
         User currentUser = userRepository.findById(currentUserId)

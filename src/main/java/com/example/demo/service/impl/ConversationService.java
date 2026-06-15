@@ -13,6 +13,7 @@ import com.example.demo.repository.ConversationRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.interf.ConversationInterface;
 import com.example.demo.util.SecurityUtil;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +33,7 @@ public class ConversationService implements ConversationInterface {
     private final SecurityUtil securityUtil;
 
     @Override
+    @Transactional
     public CreateOrGetConversationResult createOrGetConversation(String targetEmail) {
         Long currentUserId = securityUtil.getCurrentUserId();
 
@@ -77,6 +79,7 @@ public class ConversationService implements ConversationInterface {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public SliceResponse<ConversationResponse> getConversations(int page, int size) {
         Long currentUserId = securityUtil.getCurrentUserId();
 

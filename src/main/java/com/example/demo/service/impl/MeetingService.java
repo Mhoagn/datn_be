@@ -99,6 +99,7 @@ public class MeetingService implements MeetingInterface {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public SliceResponse<MeetingResponse> getMeetings(Long groupId, int page, int size) {
         Long currentUserId = securityUtil.getCurrentUserId();
 
@@ -390,6 +391,7 @@ public class MeetingService implements MeetingInterface {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public SliceResponse<com.example.demo.dto.MeetingRecordDTO.RecordListResponse> getRecordsByGroupId(Long groupId, int page, int size) {
         Long currentUserId = securityUtil.getCurrentUserId();
 

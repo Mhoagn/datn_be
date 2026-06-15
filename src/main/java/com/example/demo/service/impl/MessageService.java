@@ -50,6 +50,7 @@ public class MessageService implements MessageInterface {
     private final SecurityUtil securityUtil;
 
     @Override
+    @Transactional(readOnly = true)
     public SliceResponse<MessageResponse> getConversationMessages(
             Long conversationId, int page, int size) {
 
