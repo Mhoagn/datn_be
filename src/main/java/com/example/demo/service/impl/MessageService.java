@@ -89,6 +89,7 @@ public class MessageService implements MessageInterface {
     }
 
     @Override
+    @Transactional
     public MessageResponse sendMessage(Long senderId, Long conversationId, MessageRequest request) {
         Conversation conversation = conversationRepository.findById(conversationId)
                 .orElseThrow(() -> new ConversationNotFoundException("Đoạn chat không tồn tại"));
@@ -160,6 +161,7 @@ public class MessageService implements MessageInterface {
     }
 
     @Override
+    @Transactional
     public MarkAsReadResponse markAsRead(Long currentUserId, Long conversationId) {
 
         // 1. Kiểm tra conversation tồn tại
@@ -287,6 +289,7 @@ public class MessageService implements MessageInterface {
     }
     
     // Helper — push thông báo tin nhắn mới đến user cá nhân
+    @Transactional(readOnly = true)
     public void notifyNewMessage(MessageResponse message) {
         System.out.println("[Notify] Processing notification for message ID: " + message.getId());
         

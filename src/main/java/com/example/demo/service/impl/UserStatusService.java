@@ -7,6 +7,7 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.interf.UserStatusInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +18,7 @@ public class UserStatusService implements UserStatusInterface {
     private final UserRepository userRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public UserStatusResponse getUserStatus(Long userId) {
 
         User user = userRepository.findById(userId)
