@@ -67,6 +67,7 @@ public class MeetingMessageService implements MeetingMessageInterface {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public SliceResponse<MeetingMessageResponse> getMessages(Long meetingId, int page, int size) {
         meetingRepository.findById(meetingId)
                 .orElseThrow(() -> new MeetingNotFoundException("Cuộc họp không tồn tại"));

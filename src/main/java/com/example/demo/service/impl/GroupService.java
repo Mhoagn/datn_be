@@ -167,6 +167,7 @@ public class GroupService implements GroupInterface {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public JoinCodeResponse getJoinCode(Long groupId){
         Long currentUserId = securityUtil.getCurrentUserId();
         Group group = groupRepository.findById(groupId)

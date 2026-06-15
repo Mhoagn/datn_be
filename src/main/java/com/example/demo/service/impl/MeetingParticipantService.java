@@ -14,6 +14,7 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.interf.MeetingParticipantInterface;
 import com.example.demo.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -31,6 +32,7 @@ public class MeetingParticipantService implements MeetingParticipantInterface {
     private final SecurityUtil securityUtil;
 
     @Override
+    @Transactional(readOnly = true)
     public SliceResponse<MeetingParticipantResponse> getParticipants(Long meetingId, int page, int size) {
         Long currentUserId = securityUtil.getCurrentUserId();
 

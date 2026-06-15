@@ -101,6 +101,7 @@ public class ProfileService implements ProfileInterface {
     }
     
     @Override
+    @Transactional(readOnly = true)
     public SliceResponse<ProfileResponse> searchUsersByEmail(String email, int page, int size) {
         User currentUser = securityUtil.getCurrentUser();
         org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size);
