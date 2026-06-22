@@ -3,9 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.dto.SliceResponse;
 import com.example.demo.dto.conversationDTO.ConversationResponse;
 import com.example.demo.dto.conversationDTO.CreateOrGetConversationResult;
-import com.example.demo.dto.messageDTO.MessageResponse;
 import com.example.demo.entity.Conversation;
-import com.example.demo.entity.Message;
 import com.example.demo.entity.User;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.mapper.ConversationMapper;
@@ -15,11 +13,9 @@ import com.example.demo.service.interf.ConversationInterface;
 import com.example.demo.util.SecurityUtil;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -83,22 +79,23 @@ public class ConversationService implements ConversationInterface {
     public SliceResponse<ConversationResponse> getConversations(int page, int size) {
         Long currentUserId = securityUtil.getCurrentUserId();
 
-        Pageable pageable = PageRequest.of(page, size);
+        List<Conversation> all = conversationRepository.findAllByUserId(currentUserId);
 
-        Slice<Conversation> slice = conversationRepository
-                .findAllByUserId(currentUserId, pageable);
+        int start = page * size;
+        int end = Math.min(start + size, all.size());
+        boolean hasNext = end < all.size();
 
-        List<ConversationResponse> content = slice.getContent()
-                .stream()
+        List<Conversation> pageItems = start < all.size() ? all.subList(start, end) : Collections.emptyList();
+        List<ConversationResponse> content = pageItems.stream()
                 .map(conversation -> conversationMapper
                         .toConversationResponse(conversation, currentUserId))
                 .collect(Collectors.toList());
 
         return SliceResponse.<ConversationResponse>builder()
                 .content(content)
-                .page(slice.getNumber())
-                .size(slice.getSize())
-                .hasNext(slice.hasNext())
+                .page(page)
+                .size(size)
+                .hasNext(hasNext)
                 .build();
     }
 
