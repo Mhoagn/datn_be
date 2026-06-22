@@ -15,40 +15,43 @@ import java.util.Map;
 public class EmailService {
 
     private static final Logger log = LoggerFactory.getLogger(EmailService.class);
-    private static final String RESEND_API_URL = "https://api.resend.com/emails";
+    private static final String BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${resend.api-key}")
+    @Value("${brevo.api-key}")
     private String apiKey;
 
-    @Value("${resend.from-email:onboarding@resend.dev}")
+    @Value("${brevo.from-email}")
     private String fromEmail;
+
+    @Value("${brevo.from-name:DATN App}")
+    private String fromName;
 
     @Async
     public void sendOtpEmail(String toEmail, String otp) {
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.setBearerAuth(apiKey);
+            headers.set("api-key", apiKey);
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             Map<String, Object> body = Map.of(
-                    "from", fromEmail,
-                    "to", List.of(toEmail),
+                    "sender", Map.of("name", fromName, "email", fromEmail),
+                    "to", List.of(Map.of("email", toEmail)),
                     "subject", "Mã OTP đặt lại mật khẩu",
-                    "text", "Xin chào,\n\n" +
+                    "textContent", "Xin chào,\n\n" +
                             "Mã OTP của bạn là: " + otp + "\n\n" +
                             "Mã có hiệu lực trong 10 phút.\n" +
                             "Nếu bạn không yêu cầu, hãy bỏ qua email này."
             );
 
             HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
-            ResponseEntity<String> response = restTemplate.postForEntity(RESEND_API_URL, request, String.class);
+            ResponseEntity<String> response = restTemplate.postForEntity(BREVO_API_URL, request, String.class);
 
             if (response.getStatusCode().is2xxSuccessful()) {
                 log.info("[Email] OTP sent successfully to {}", toEmail);
             } else {
-                log.error("[Email] Resend API returned {}: {}", response.getStatusCode(), response.getBody());
+                log.error("[Email] Brevo API returned {}: {}", response.getStatusCode(), response.getBody());
             }
         } catch (Exception e) {
             log.error("[Email] Failed to send OTP to {}: {}", toEmail, e.getMessage(), e);
