@@ -26,8 +26,8 @@ public interface ConversationRepository extends JpaRepository<Conversation, Long
 
     @Query("""
     SELECT c FROM Conversation c
-    WHERE c.user1.id = :userId OR c.user2.id = :userId
-    ORDER BY c.lastMessageAt DESC NULLS LAST
+    WHERE c.user1Id = :userId OR c.user2Id = :userId
+    ORDER BY CASE WHEN c.lastMessageAt IS NULL THEN 1 ELSE 0 END ASC, c.lastMessageAt DESC
 """)
     Slice<Conversation> findAllByUserId(
             @Param("userId") Long userId,
@@ -36,7 +36,7 @@ public interface ConversationRepository extends JpaRepository<Conversation, Long
 
     @Query("""
     SELECT c FROM Conversation c
-    WHERE c.user1.id = :userId OR c.user2.id = :userId
+    WHERE c.user1Id = :userId OR c.user2Id = :userId
 """)
     List<Conversation> findAllByUserIdNoPage(@Param("userId") Long userId);
 }
