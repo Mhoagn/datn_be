@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.demo.dto.TranscriptDTO.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,6 @@ import com.example.demo.dto.SummaryDTO.FinalSummaryResponse;
 import com.example.demo.dto.SummaryDTO.SaveFinalSummaryRequest;
 import com.example.demo.dto.SummaryDTO.SummaryPointDTO;
 import com.example.demo.dto.SummaryDTO.SummaryResponse;
-import com.example.demo.dto.TranscriptDTO.AIServiceRequest;
-import com.example.demo.dto.TranscriptDTO.AIServiceResponse;
-import com.example.demo.dto.TranscriptDTO.TranscriptResponse;
-import com.example.demo.dto.TranscriptDTO.TranscriptSegmentDTO;
 import com.example.demo.entity.MeetingRecord;
 import com.example.demo.entity.MeetingSummaryCandidate;
 import com.example.demo.entity.MeetingSummaryFinal;

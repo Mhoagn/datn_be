@@ -1,5 +1,7 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.TranscriptDTO.AIServiceJobStartResponse;
+import com.example.demo.dto.TranscriptDTO.AIServiceJobStatusResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
