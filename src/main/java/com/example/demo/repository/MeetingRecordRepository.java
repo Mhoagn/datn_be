@@ -44,4 +44,7 @@ public interface MeetingRecordRepository extends JpaRepository<MeetingRecord, Lo
         ORDER BY r.createdAt DESC
     """)
     Slice<MeetingRecord> findByGroupId(@Param("groupId") Long groupId, Pageable pageable);
+
+    @Query("SELECT mr.meeting.groupId FROM MeetingRecord mr WHERE mr.id = :recordId")
+    Long findGroupIdByMeetingRecordId(@Param("recordId") Long recordId);
 }

@@ -18,6 +18,7 @@ import java.util.Map;
 public class TranscriptController {
     
     private final TranscriptService transcriptService;
+    private final com.example.demo.util.SecurityUtil securityUtil;
     
     /**
      * Lấy transcript của một meeting record
@@ -99,7 +100,8 @@ public class TranscriptController {
      */
     @PostMapping("/record/{recordId}/process")
     public ResponseEntity<Map<String, String>> triggerProcessing(@PathVariable Long recordId) {
-        transcriptService.processRecordedVideo(recordId);
+        Long currentUserId = securityUtil.getCurrentUserId();
+        transcriptService.processRecordedVideo(recordId, currentUserId);
         return ResponseEntity.accepted().body(Map.of(
             "status", "processing",
             "message", "Đã khởi tạo xử lý AI cho bản ghi. Vui lòng đợi vài phút."

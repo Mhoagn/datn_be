@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.demo.dto.TranscriptDTO.*;
+import com.example.demo.entity.*;
+import com.example.demo.exception.UserNotInGroupException;
+import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -14,21 +17,9 @@ import com.example.demo.dto.SummaryDTO.FinalSummaryResponse;
 import com.example.demo.dto.SummaryDTO.SaveFinalSummaryRequest;
 import com.example.demo.dto.SummaryDTO.SummaryPointDTO;
 import com.example.demo.dto.SummaryDTO.SummaryResponse;
-import com.example.demo.entity.MeetingRecord;
-import com.example.demo.entity.MeetingSummaryCandidate;
-import com.example.demo.entity.MeetingSummaryFinal;
-import com.example.demo.entity.MeetingSummaryPoint;
-import com.example.demo.entity.MeetingTranscript;
-import com.example.demo.entity.User;
 import com.example.demo.exception.FinalSummaryNotFoundException;
 import com.example.demo.exception.MeetingRecordNotFoundException;
 import com.example.demo.exception.UserNotFoundException;
-import com.example.demo.repository.MeetingRecordRepository;
-import com.example.demo.repository.MeetingSummaryCandidateRepository;
-import com.example.demo.repository.MeetingSummaryFinalRepository;
-import com.example.demo.repository.MeetingSummaryPointRepository;
-import com.example.demo.repository.MeetingTranscriptRepository;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.util.SecurityUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,6 +37,7 @@ public class TranscriptService {
     private final MeetingSummaryCandidateRepository summaryCandidateRepository;
     private final MeetingSummaryPointRepository summaryPointRepository;
     private final MeetingSummaryFinalRepository summaryFinalRepository;
+    private final GroupMemberRepository groupMemberRepository;
     private final UserRepository userRepository;
     private final AIServiceClient aiServiceClient;
     private final ObjectMapper objectMapper;
@@ -75,7 +67,7 @@ public class TranscriptService {
      * Mỗi thao tác DB được bọc trong @Transactional riêng ở các helper method.
      */
     @Async
-    public void processRecordedVideo(Long recordId) {
+    public void processRecordedVideo(Long recordId, Long currentUserId) {
         log.info("Bắt đầu xử lý video cho record ID: {}", recordId);
 
         // 1. Lấy thông tin record
@@ -93,6 +85,15 @@ public class TranscriptService {
             log.error("Record ID {} chưa COMPLETED. Status hiện tại: {}", recordId, record.getStatus());
             return;
         }
+
+        User creator = userRepository.findById(currentUserId)
+                .orElseThrow(() -> new UserNotFoundException("Người dùng không tồn tại"));
+
+        Long groupId = meetingRecordRepository.findGroupIdByMeetingRecordId(recordId);
+
+        GroupMember findMember = groupMemberRepository
+                .findByUserIdAndGroupId(currentUserId, groupId)
+                .orElseThrow(() -> new UserNotInGroupException("Người dùng không ở trong nhóm"));
 
         // 2. Khởi tạo hoặc reset MeetingTranscript → PROCESSING
         MeetingTranscript transcript = initOrResetTranscript(recordId, record);
