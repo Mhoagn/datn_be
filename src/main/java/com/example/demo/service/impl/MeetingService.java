@@ -378,9 +378,9 @@ public class MeetingService implements MeetingInterface {
         record = meetingRecordRepository.save(record);
 
         // 9. Gọi AI service để xử lý video (async) - chỉ khi COMPLETED
-        if (record.getStatus() == MeetingRecord.Status.COMPLETED) {
-            transcriptService.processRecordedVideo(record.getId());
-        }
+        //if (record.getStatus() == MeetingRecord.Status.COMPLETED) {
+            //transcriptService.processRecordedVideo(record.getId());
+        //}
 
         // 10. Notify WebSocket cho tất cả participants trong meeting
         groupWebSocketService.broadcastRecordStopped(
