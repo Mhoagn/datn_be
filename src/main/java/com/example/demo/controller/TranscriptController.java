@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.SummaryDTO.*;
 import com.example.demo.dto.TranscriptDTO.TranscriptResponse;
-import com.example.demo.service.impl.TranscriptService;
+import com.example.demo.service.interf.TranscriptInterface;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class TranscriptController {
     
-    private final TranscriptService transcriptService;
+    private final TranscriptInterface transcriptService;
     private final com.example.demo.util.SecurityUtil securityUtil;
     
     /**

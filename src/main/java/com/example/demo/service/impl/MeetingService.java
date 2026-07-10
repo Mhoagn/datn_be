@@ -11,6 +11,7 @@ import com.example.demo.mapper.MeetingMapper;
 import com.example.demo.mapper.MeetingRecordMapper;
 import com.example.demo.repository.*;
 import com.example.demo.service.interf.MeetingInterface;
+import com.example.demo.service.interf.TranscriptInterface;
 import com.example.demo.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,7 +40,7 @@ public class MeetingService implements MeetingInterface {
     private final MeetingRecordMapper meetingRecordMapper;
     private final SecurityUtil securityUtil;
     private final ApplicationEventPublisher eventPublisher;
-    private final TranscriptService transcriptService;
+    private final TranscriptInterface transcriptService;
     private final GroupWebSocketService groupWebSocketService;
 
     @Value("${livekit.s3.bucket}")

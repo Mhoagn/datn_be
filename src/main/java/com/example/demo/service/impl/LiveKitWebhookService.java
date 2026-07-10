@@ -1,16 +1,19 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.MeetingRecord;
-import com.example.demo.repository.MeetingRecordRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.Map;
+import com.example.demo.entity.MeetingRecord;
+import com.example.demo.repository.MeetingRecordRepository;
+import com.example.demo.service.interf.TranscriptInterface;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +21,7 @@ import java.util.Map;
 public class LiveKitWebhookService {
 
     private final MeetingRecordRepository meetingRecordRepository;
-    private final TranscriptService transcriptService;
+    private final TranscriptInterface transcriptService;
 
     @Value("${livekit.s3.bucket}")
     private String s3Bucket;
