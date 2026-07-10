@@ -14,6 +14,7 @@ import com.example.demo.service.interf.MeetingInterface;
 import com.example.demo.service.interf.TranscriptInterface;
 import com.example.demo.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +30,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MeetingService implements MeetingInterface {
     private final MeetingRepository meetingRepository;
     private final MeetingParticipantRepository participantRepository;
@@ -214,14 +216,18 @@ public class MeetingService implements MeetingInterface {
                 .findActiveSession(currentUserId, meetingId)
                 .orElseThrow(() -> new UserNotInMeetingException("Người dùng chưa tham gia cuộc họp"));
 
-
-        Optional<MeetingRecord> meetingRecord = meetingRecordRepository.findByMeeting_IdAndRecordedBy(meetingId,currentUserId);
-        if(meetingRecord.isPresent()) {
-            stopRecord(meetingId);
-        }
-
         // HOST leave → tự động end meeting luôn
         if (participant.getRole() == MeetingParticipant.Role.HOST) {
+            // Thử stop record nếu có, fail cũng không block endMeeting
+            try {
+                Optional<MeetingRecord> meetingRecord = meetingRecordRepository
+                        .findByMeeting_IdAndRecordedBy(meetingId, currentUserId);
+                if (meetingRecord.isPresent()) {
+                    stopRecord(meetingId);
+                }
+            } catch (Exception e) {
+                log.warn("Không thể dừng record khi host rời phòng: {}", e.getMessage());
+            }
             endMeeting(meetingId);
             return MeetingLeaveResponse.builder()
                     .id(participant.getId())
@@ -231,6 +237,16 @@ public class MeetingService implements MeetingInterface {
                     .build();
         }
 
+        // Non-host: thử stop record nếu đang record, fail cũng không block leave
+        try {
+            Optional<MeetingRecord> meetingRecord = meetingRecordRepository
+                    .findByMeeting_IdAndRecordedBy(meetingId, currentUserId);
+            if (meetingRecord.isPresent()) {
+                stopRecord(meetingId);
+            }
+        } catch (Exception e) {
+            log.warn("Không thể dừng record khi rời phòng: {}", e.getMessage());
+        }
 
         LocalDateTime leftAt = LocalDateTime.now();
         participant.setLeftAt(leftAt);
