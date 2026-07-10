@@ -17,6 +17,7 @@ import com.example.demo.dto.SummaryDTO.FinalSummaryResponse;
 import com.example.demo.dto.SummaryDTO.SaveFinalSummaryRequest;
 import com.example.demo.dto.SummaryDTO.SummaryPointDTO;
 import com.example.demo.dto.SummaryDTO.SummaryResponse;
+import com.example.demo.event.NewSummaryEvent;
 import com.example.demo.exception.FinalSummaryNotFoundException;
 import com.example.demo.exception.MeetingRecordNotFoundException;
 import com.example.demo.exception.UserNotFoundException;
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +45,7 @@ public class TranscriptService implements TranscriptInterface {
     private final AIServiceClient aiServiceClient;
     private final ObjectMapper objectMapper;
     private final SecurityUtil securityUtil;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Value("${livekit.s3.bucket}")
     private String s3Bucket;
@@ -413,6 +416,10 @@ public class TranscriptService implements TranscriptInterface {
 
         MeetingSummaryFinal saved = summaryFinalRepository.save(finalSummary);
         log.info("Lưu final summary thành công với {} điểm được chọn", request.getSelectedPointIds().size());
+
+        Long groupId = meetingRecordRepository.findGroupIdByMeetingRecordId(request.getMeetingRecordId());
+        eventPublisher.publishEvent(new NewSummaryEvent(userId, groupId, request.getMeetingRecordId()));
+        log.info("Đã publish NewSummaryEvent cho group {} bởi user {}", groupId, userId);
 
         return new FinalSummaryResponse(
                 saved.getId(),
