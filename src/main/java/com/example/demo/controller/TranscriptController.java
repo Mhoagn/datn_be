@@ -99,9 +99,11 @@ public class TranscriptController {
      * POST /transcripts/record/{recordId}/process
      */
     @PostMapping("/record/{recordId}/process")
-    public ResponseEntity<Map<String, String>> triggerProcessing(@PathVariable Long recordId) {
+    public ResponseEntity<Map<String, String>> triggerProcessing(
+            @PathVariable Long recordId,
+            @RequestParam(value = "numPoints", required = false) Integer numPoints) {
         Long currentUserId = securityUtil.getCurrentUserId();
-        transcriptService.processRecordedVideo(recordId, currentUserId);
+        transcriptService.processRecordedVideo(recordId, currentUserId, numPoints);
         return ResponseEntity.accepted().body(Map.of(
             "status", "processing",
             "message", "Đã khởi tạo xử lý AI cho bản ghi. Vui lòng đợi vài phút."

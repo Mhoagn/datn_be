@@ -134,12 +134,12 @@ public class LiveKitWebhookService {
         log.info("✅ Updated record ID {} - storageUrl: {}", record.getId(), storageUrl);
 
         // Gọi AI service để xử lý video (async)
-        try {
-            transcriptService.processRecordedVideo(record.getId(), record.getRecordedBy());
-            log.info("🤖 Triggered transcript processing for record ID: {}", record.getId());
-        } catch (Exception e) {
-            log.error("❌ Failed to trigger transcript processing: {}", e.getMessage(), e);
-        }
+//        try {
+//            transcriptService.processRecordedVideo(record.getId(), record.getRecordedBy());
+//            log.info("🤖 Triggered transcript processing for record ID: {}", record.getId());
+//        } catch (Exception e) {
+//            log.error("❌ Failed to trigger transcript processing: {}", e.getMessage(), e);
+//        }
     }
 
     /**

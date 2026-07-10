@@ -23,4 +23,7 @@ public class AIServiceRequest {
     
     @JsonProperty("aws_secret_key")
     private String awsSecretKey;
+
+    @JsonProperty("num_points")
+    private Integer numPoints;
 }
