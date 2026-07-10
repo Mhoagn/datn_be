@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -213,6 +214,12 @@ public class MeetingService implements MeetingInterface {
                 .findActiveSession(currentUserId, meetingId)
                 .orElseThrow(() -> new UserNotInMeetingException("Người dùng chưa tham gia cuộc họp"));
 
+
+        Optional<MeetingRecord> meetingRecord = meetingRecordRepository.findByMeeting_IdAndRecordedBy(meetingId,currentUserId);
+        if(meetingRecord.isPresent()) {
+            stopRecord(meetingId);
+        }
+
         // HOST leave → tự động end meeting luôn
         if (participant.getRole() == MeetingParticipant.Role.HOST) {
             endMeeting(meetingId);
@@ -223,6 +230,7 @@ public class MeetingService implements MeetingInterface {
                     .leftAt(LocalDateTime.now())
                     .build();
         }
+
 
         LocalDateTime leftAt = LocalDateTime.now();
         participant.setLeftAt(leftAt);

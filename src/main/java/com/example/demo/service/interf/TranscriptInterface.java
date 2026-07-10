@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface TranscriptInterface {
 
-    void processRecordedVideo(Long recordId, Long currentUserId);
+    void processRecordedVideo(Long recordId, Long currentUserId, Integer numPoints);
 
     TranscriptResponse getTranscript(Long recordId);
 

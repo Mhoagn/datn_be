@@ -72,7 +72,7 @@ public class TranscriptService implements TranscriptInterface {
      */
     @Override
     @Async
-    public void processRecordedVideo(Long recordId, Long currentUserId) {
+    public void processRecordedVideo(Long recordId, Long currentUserId, Integer numPoints) {
         log.info("Bắt đầu xử lý video cho record ID: {}", recordId);
 
         // 1. Lấy thông tin record
@@ -117,7 +117,7 @@ public class TranscriptService implements TranscriptInterface {
         try {
             log.info("Gửi job xử lý video lên AI-service (async job pattern)...");
             AIServiceRequest request = new AIServiceRequest(
-                    s3Bucket, record.getS3Key(), s3Region, awsAccessKey, awsSecretKey);
+                    s3Bucket, record.getS3Key(), s3Region, awsAccessKey, awsSecretKey, numPoints);
 
             AIServiceJobStartResponse jobStart = aiServiceClient.startProcessingJob(request);
             jobId = jobStart.getJobId();

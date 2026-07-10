@@ -47,4 +47,6 @@ public interface MeetingRecordRepository extends JpaRepository<MeetingRecord, Lo
 
     @Query("SELECT mr.meeting.groupId FROM MeetingRecord mr WHERE mr.id = :recordId")
     Long findGroupIdByMeetingRecordId(@Param("recordId") Long recordId);
+
+    Optional<MeetingRecord> findByMeeting_IdAndRecordedBy(Long meetingId, Long recordedId);
 }
