@@ -20,6 +20,7 @@ import com.example.demo.dto.SummaryDTO.SummaryResponse;
 import com.example.demo.exception.FinalSummaryNotFoundException;
 import com.example.demo.exception.MeetingRecordNotFoundException;
 import com.example.demo.exception.UserNotFoundException;
+import com.example.demo.service.interf.TranscriptInterface;
 import com.example.demo.util.SecurityUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class TranscriptService {
+public class TranscriptService implements TranscriptInterface {
 
     private final MeetingRecordRepository meetingRecordRepository;
     private final MeetingTranscriptRepository transcriptRepository;
@@ -66,6 +67,7 @@ public class TranscriptService {
      * (giữ transaction mở lâu sẽ gây leak DB connection).
      * Mỗi thao tác DB được bọc trong @Transactional riêng ở các helper method.
      */
+    @Override
     @Async
     public void processRecordedVideo(Long recordId, Long currentUserId) {
         log.info("Bắt đầu xử lý video cho record ID: {}", recordId);
@@ -333,6 +335,7 @@ public class TranscriptService {
     // Các method read/write khác (không thay đổi)
     // =========================================================
 
+    @Override
     @Transactional(readOnly = true)
     public TranscriptResponse getTranscript(Long recordId) {
         MeetingTranscript transcript = transcriptRepository.findByMeetingRecordId(recordId)
@@ -340,6 +343,7 @@ public class TranscriptService {
         return convertToTranscriptResponse(transcript);
     }
 
+    @Override
     @Transactional(readOnly = true)
     public List<SummaryResponse> getSummaries(Long recordId) {
         List<MeetingSummaryCandidate> candidates = summaryCandidateRepository.findByMeetingRecordId(recordId);
@@ -348,6 +352,7 @@ public class TranscriptService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public SummaryPointDTO updatePointSelection(Long pointId, Boolean isSelected) {
         log.info("Cập nhật selection cho point ID: {}, isSelected: {}", pointId, isSelected);
@@ -360,6 +365,7 @@ public class TranscriptService {
                 updated.getOrderIndex(), updated.getIsSelected());
     }
 
+    @Override
     @Transactional
     public SummaryPointDTO updatePointContent(Long pointId, String content) {
         log.info("Cập nhật nội dung cho point ID: {}", pointId);
@@ -372,6 +378,7 @@ public class TranscriptService {
                 updated.getOrderIndex(), updated.getIsSelected());
     }
 
+    @Override
     @Transactional
     public FinalSummaryResponse saveFinalSummary(SaveFinalSummaryRequest request) {
         log.info("Lưu final summary cho record ID: {}", request.getMeetingRecordId());
@@ -418,6 +425,7 @@ public class TranscriptService {
                 saved.getUpdatedAt());
     }
 
+    @Override
     @Transactional(readOnly = true)
     public FinalSummaryResponse getFinalSummary(Long recordId) {
         MeetingSummaryFinal finalSummary = summaryFinalRepository.findByMeetingRecordId(recordId)
