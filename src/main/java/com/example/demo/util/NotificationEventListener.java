@@ -5,6 +5,7 @@ import com.example.demo.event.*;
 import com.example.demo.service.NotificationDispatcher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
@@ -39,6 +40,16 @@ public class NotificationEventListener {
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void handleNewSummary(NewSummaryEvent event) {
         notificationDispatcher.dispatch(Notification.Type.NEW_SUMMARY, event);
+    }
+
+    @Async
+    @EventListener
+    public void handleAiSummaryReady(AiSummaryReadyEvent event) {
+        try {
+            notificationDispatcher.dispatch(Notification.Type.AI_SUMMARY_READY, event);
+        } catch (Exception e) {
+            log.error("Failed to dispatch AI_SUMMARY_READY notification: {}", e.getMessage(), e);
+        }
     }
 
     @Async

@@ -21,6 +21,7 @@ public class RecordListResponse {
     private Integer durationSeconds;
     private String status;
     private Boolean hasFinalSummary;  // Có bản tóm tắt cuối cùng chưa
+    private String aiSummaryStatus;   // PROCESSING | COMPLETED | FAILED | null
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

@@ -17,6 +17,7 @@ import com.example.demo.dto.SummaryDTO.FinalSummaryResponse;
 import com.example.demo.dto.SummaryDTO.SaveFinalSummaryRequest;
 import com.example.demo.dto.SummaryDTO.SummaryPointDTO;
 import com.example.demo.dto.SummaryDTO.SummaryResponse;
+import com.example.demo.event.AiSummaryReadyEvent;
 import com.example.demo.event.NewSummaryEvent;
 import com.example.demo.exception.FinalSummaryNotFoundException;
 import com.example.demo.exception.MeetingRecordNotFoundException;
@@ -194,6 +195,9 @@ public class TranscriptService implements TranscriptInterface {
             summaryCandidateRepository.save(summaryCandidate);
 
             saveSummaryPoints(summaryCandidate, aiResponse.getSummary());
+
+            eventPublisher.publishEvent(new AiSummaryReadyEvent(currentUserId, groupId, recordId));
+            log.info("Đã publish AiSummaryReadyEvent cho user {} record {}", currentUserId, recordId);
 
         } catch (Exception e) {
             log.error("Lỗi khi lưu kết quả AI: {}", e.getMessage(), e);
