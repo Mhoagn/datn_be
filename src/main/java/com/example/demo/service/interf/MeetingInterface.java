@@ -8,6 +8,10 @@ import com.example.demo.dto.SliceResponse;
 
 public interface MeetingInterface {
     MeetingResponse createMeeting(CreateMeetingRequest createMeetingRequest);
+    MeetingResponse scheduleMeeting(ScheduleMeetingRequest request);
+    SliceResponse<MeetingResponse> getScheduledMeetings(Long groupId, int page, int size);
+    MeetingResponse cancelScheduledMeeting(Long meetingId);
+    MeetingResponse startScheduledMeeting(Long meetingId);
     SliceResponse<MeetingResponse> getMeetings(Long groupId, int page, int size);
     MeetingJoinResponse joinMeeting(Long meetingId);
     MeetingLeaveResponse leaveMeeting(Long meetingId);

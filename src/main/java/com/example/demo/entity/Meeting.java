@@ -3,7 +3,6 @@ package com.example.demo.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,22 +26,30 @@ public class Meeting {
     
     @Column(length = 255)
     private String meetingTitle;
-    
+
     @Column(nullable = false, insertable = false, updatable = false)
     private Long createdBy;
     
-    @CreationTimestamp
-    @Column(nullable = false, updatable = false)
+    @Column
     private LocalDateTime startedAt;
+
+    @Column
+    private LocalDateTime scheduledStartAt;
+
+    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private Boolean creatorReminderSent = false;
+
+    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private Boolean dueNotificationSent = false;
     
     @Column
     private LocalDateTime endedAt;
     
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "ENUM('ONGOING', 'END') DEFAULT 'ONGOING'")
+    @Column(nullable = false, columnDefinition = "ENUM('SCHEDULED', 'ONGOING', 'END', 'CANCELLED') DEFAULT 'ONGOING'")
     private Status status = Status.ONGOING;
     
-    @Column(name = "livekit_room_name", nullable = false)
+    @Column(name = "livekit_room_name", nullable = true)
     private String liveKitRoomName;
     
     // ========== Relationships ==========
@@ -75,7 +82,7 @@ public class Meeting {
     private List<MeetingRecord> records = new ArrayList<>();
     
     public enum Status {
-        ONGOING, END
+        SCHEDULED, ONGOING, END, CANCELLED
     }
 
 }

@@ -134,10 +134,13 @@ CREATE TABLE `Meetings`(
     `group_id`          BIGINT                         NOT NULL,
     `meeting_title`     VARCHAR(255)                   NULL,
     `created_by`        BIGINT                         NOT NULL,
-    `started_at`        TIMESTAMP                      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `started_at`        TIMESTAMP                      NULL,
     `ended_at`          TIMESTAMP                      NULL,
-    `status`            ENUM('ONGOING', 'END')         NOT NULL DEFAULT 'ONGOING',
-    `livekit_room_name` VARCHAR(255)                   NOT NULL,
+    `scheduled_start_at` TIMESTAMP                     NULL,
+    `creator_reminder_sent` TINYINT(1)                 NOT NULL DEFAULT 0,
+    `due_notification_sent` TINYINT(1)                  NOT NULL DEFAULT 0,
+    `status`            ENUM('SCHEDULED', 'ONGOING', 'END', 'CANCELLED') NOT NULL DEFAULT 'ONGOING',
+    `livekit_room_name` VARCHAR(255)                   NULL,
     PRIMARY KEY (`id`),
     INDEX `idx_group_id`   (`group_id`),
     INDEX `idx_created_by` (`created_by`),
@@ -307,13 +310,7 @@ CREATE TABLE `Messages`(
 
 CREATE TABLE `Notifications`(
     `id`             BIGINT    NOT NULL AUTO_INCREMENT,
-    `type`           ENUM(
-                       'NEW_POST',
-                       'NEW_MEMBER',
-                       'NEW_MEETING',
-                       'NEW_SUMMARY',
-                       'JOIN_REQUEST'
-                     ) NOT NULL,
+    `type`           VARCHAR(50) NOT NULL,
     `actor_id`       BIGINT       NULL,   -- người thực hiện hành động
     `group_id`       BIGINT       NULL,   -- nhóm liên quan
     `reference_id`   BIGINT       NULL,   -- post_id / meeting_id / record_id / request_id

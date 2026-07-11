@@ -1,0 +1,31 @@
+package com.example.demo.strategy.notification;
+
+import com.example.demo.entity.Notification;
+import com.example.demo.event.NotificationEvent;
+import com.example.demo.repository.GroupMemberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Component
+@RequiredArgsConstructor
+public class MeetingScheduledStrategy implements NotificationStrategy {
+
+    private final GroupMemberRepository groupMemberRepository;
+
+    @Override
+    public Notification.Type getSupportedType() {
+        return Notification.Type.MEETING_SCHEDULED;
+    }
+
+    @Override
+    public List<Long> resolveRecipients(NotificationEvent event) {
+        return groupMemberRepository
+                .findActiveUserIdsByGroupId(event.getGroupId())
+                .stream()
+                .filter(uid -> !uid.equals(event.getActorId()))
+                .collect(Collectors.toList());
+    }
+}

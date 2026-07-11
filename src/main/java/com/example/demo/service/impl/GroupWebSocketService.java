@@ -60,6 +60,39 @@ public class GroupWebSocketService {
         log.info("Broadcasted meeting update to group {}", groupId);
     }
 
+    public void broadcastScheduledMeetingCreated(Long groupId, Object meetingData) {
+        MeetingBroadcast broadcast = MeetingBroadcast.builder()
+                .type("SCHEDULED_MEETING_CREATED")
+                .meeting(meetingData)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        messagingTemplate.convertAndSend("/topic/group." + groupId, broadcast);
+        log.info("Broadcasted scheduled meeting created to group {}", groupId);
+    }
+
+    public void broadcastScheduledMeetingDue(Long groupId, Object meetingData) {
+        MeetingBroadcast broadcast = MeetingBroadcast.builder()
+                .type("SCHEDULED_MEETING_DUE")
+                .meeting(meetingData)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        messagingTemplate.convertAndSend("/topic/group." + groupId, broadcast);
+        log.info("Broadcasted scheduled meeting due to group {}", groupId);
+    }
+
+    public void broadcastScheduledMeetingCancelled(Long groupId, Long meetingId) {
+        MeetingBroadcast broadcast = MeetingBroadcast.builder()
+                .type("SCHEDULED_MEETING_CANCELLED")
+                .meeting(java.util.Map.of("id", meetingId))
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        messagingTemplate.convertAndSend("/topic/group." + groupId, broadcast);
+        log.info("Broadcasted scheduled meeting cancelled to group {}", groupId);
+    }
+
     // Broadcast khi bắt đầu record đến tất cả participants trong meeting
     public void broadcastRecordStarted(Long groupId, Long meetingId, Long recordedBy) {
         RecordBroadcast broadcast = RecordBroadcast.builder()
