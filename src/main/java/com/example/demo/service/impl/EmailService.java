@@ -16,6 +16,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import jakarta.annotation.PostConstruct;
+
 @Service
 public class EmailService {
 
@@ -34,6 +36,19 @@ public class EmailService {
 
     @Value("${brevo.from-name:DATN App}")
     private String fromName;
+
+    @PostConstruct
+    void initBrevoConfig() {
+        apiKey = apiKey != null ? apiKey.trim() : "";
+        fromEmail = fromEmail != null ? fromEmail.trim() : "";
+        fromName = fromName != null ? fromName.trim() : "DATN App";
+
+        if (apiKey.isBlank() || fromEmail.isBlank()) {
+            log.error("[Email] Thiếu BREVO_API_KEY hoặc BREVO_FROM_EMAIL — không gửi được email");
+        } else {
+            log.info("[Email] Brevo ready, sender={}", fromEmail);
+        }
+    }
 
     @Async
     public void sendOtpEmail(String toEmail, String otp) {
@@ -79,9 +94,15 @@ public class EmailService {
     }
 
     private void sendEmail(String toEmail, String subject, String textContent) {
+        if (apiKey.isBlank() || fromEmail.isBlank()) {
+            log.error("[Email] Bỏ qua gửi tới {} — chưa cấu hình Brevo", toEmail);
+            return;
+        }
+
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.set("api-key", apiKey);
+            headers.set("accept", MediaType.APPLICATION_JSON_VALUE);
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             Map<String, Object> body = Map.of(
