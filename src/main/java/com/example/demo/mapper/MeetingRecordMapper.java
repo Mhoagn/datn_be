@@ -4,6 +4,8 @@ import com.example.demo.dto.MeetingRecordDTO.RecordListResponse;
 import com.example.demo.dto.MeetingRecordDTO.RecordResponse;
 import com.example.demo.dto.MeetingRecordDTO.RecordStopResponse;
 import com.example.demo.entity.MeetingRecord;
+import com.example.demo.entity.MeetingSummaryCandidate;
+import com.example.demo.repository.MeetingSummaryCandidateRepository;
 import com.example.demo.repository.MeetingSummaryFinalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class MeetingRecordMapper {
     
     private final MeetingSummaryFinalRepository summaryFinalRepository;
+    private final MeetingSummaryCandidateRepository summaryCandidateRepository;
 
     public RecordResponse toRecordResponse(MeetingRecord record) {
         return RecordResponse.builder()
@@ -41,7 +44,12 @@ public class MeetingRecordMapper {
     public RecordListResponse toRecordListResponse(MeetingRecord record) {
         // Check if final summary exists for this record
         boolean hasFinalSummary = summaryFinalRepository.findByMeetingRecordId(record.getId()).isPresent();
-        
+
+        String aiSummaryStatus = summaryCandidateRepository
+                .findByMeetingRecordIdAndAiModel(record.getId(), MeetingSummaryCandidate.AiModel.QWEN)
+                .map(c -> c.getStatus().name())
+                .orElse(null);
+
         return RecordListResponse.builder()
                 .id(record.getId())
                 .meetingId(record.getMeetingId())
@@ -55,6 +63,7 @@ public class MeetingRecordMapper {
                 .durationSeconds(record.getDurationSeconds())
                 .status(record.getStatus().name())
                 .hasFinalSummary(hasFinalSummary)
+                .aiSummaryStatus(aiSummaryStatus)
                 .createdAt(record.getCreatedAt())
                 .updatedAt(record.getUpdatedAt())
                 .build();
