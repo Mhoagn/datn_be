@@ -28,7 +28,7 @@ public class Notification {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "ENUM('NEW_POST', 'NEW_MEMBER', 'NEW_MEETING', 'NEW_SUMMARY', 'JOIN_REQUEST')")
+    @Column(nullable = false, length = 50)
     private Type type;
 
     @Column(name = "actor_id", insertable = false, updatable = false)
@@ -68,6 +68,8 @@ public class Notification {
         NEW_MEMBER,
         NEW_MEETING,
         NEW_SUMMARY,
-        JOIN_REQUEST
+        JOIN_REQUEST,
+        MEETING_SCHEDULED,
+        MEETING_REMINDER_CREATOR
     }
 }

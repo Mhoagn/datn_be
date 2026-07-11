@@ -368,6 +368,34 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
+    @ExceptionHandler(InvalidScheduleTimeException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidScheduleTime(
+            InvalidScheduleTimeException ex,
+            HttpServletRequest request
+    ) {
+        ErrorResponse error = ErrorResponse.builder()
+                .message(ex.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(MeetingNotStartedException.class)
+    public ResponseEntity<ErrorResponse> handleMeetingNotStarted(
+            MeetingNotStartedException ex,
+            HttpServletRequest request
+    ) {
+        ErrorResponse error = ErrorResponse.builder()
+                .message(ex.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
     @ExceptionHandler(UserNotInMeetingException.class)
     public ResponseEntity<ErrorResponse> handleAlreadyInMeeting(
             UserNotInMeetingException ex,

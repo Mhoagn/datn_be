@@ -35,12 +35,17 @@ public class NotificationDispatcher {
 
     @Transactional
     public void dispatch(Notification.Type type, NotificationEvent event) {
-        // 1. Lấy strategy phù hợp
         NotificationStrategy strategy = strategyFactory.getStrategy(type);
+        if (strategy == null) {
+            log.error("Không tìm thấy notification strategy cho type={}", type);
+            return;
+        }
 
-        // 2. Xác định recipients
         List<Long> recipientIds = strategy.resolveRecipients(event);
-        if (recipientIds.isEmpty()) return;
+        if (recipientIds.isEmpty()) {
+            log.info("Không có người nhận cho notification type={}, groupId={}", type, event.getGroupId());
+            return;
+        }
 
         // 3. Tạo và lưu Notification
         Notification notification = new Notification();

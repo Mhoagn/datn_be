@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.GroupMember;
+import com.example.demo.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,9 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> 
     @Query("SELECT gm.user.id FROM GroupMember gm WHERE gm.group.id = :groupId")
     List<Long> findUserIdsByGroupId(@Param("groupId") Long groupId);
 
+    @Query("SELECT gm.user.id FROM GroupMember gm WHERE gm.group.id = :groupId AND gm.isActive = true")
+    List<Long> findActiveUserIdsByGroupId(@Param("groupId") Long groupId);
+
     @Query("SELECT gm.user.id FROM GroupMember gm WHERE gm.group.id = :groupId AND gm.role = :role")
     List<Long> findUserIdsByGroupIdAndRole(@Param("groupId") Long groupId, @Param("role") GroupMember.Role role);
 
@@ -48,4 +52,7 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> 
         ORDER BY gm.joinedAt DESC
     """)
     Slice<GroupMember> findActiveByGroupId(@Param("groupId") Long groupId, Pageable pageable);
+
+    @Query("SELECT gm.user FROM GroupMember gm WHERE gm.group.id = :groupId AND gm.isActive = true")
+    List<User> findActiveUsersByGroupId(@Param("groupId") Long groupId);
 }

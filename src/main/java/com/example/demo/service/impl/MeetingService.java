@@ -6,6 +6,7 @@ import com.example.demo.dto.MeetingRecordDTO.RecordStopResponse;
 import com.example.demo.dto.SliceResponse;
 import com.example.demo.entity.*;
 import com.example.demo.event.NewMeetingEvent;
+import com.example.demo.event.MeetingScheduledEvent;
 import com.example.demo.exception.*;
 import com.example.demo.mapper.MeetingMapper;
 import com.example.demo.mapper.MeetingRecordMapper;
@@ -82,6 +83,7 @@ public class MeetingService implements MeetingInterface {
         meeting.setCreator(creator);
         meeting.setLiveKitRoomName(roomName);
         meeting.setStatus(Meeting.Status.ONGOING);
+        meeting.setStartedAt(LocalDateTime.now());
         meeting = meetingRepository.save(meeting);
 
         MeetingParticipant host = new MeetingParticipant();
@@ -295,11 +297,11 @@ public class MeetingService implements MeetingInterface {
         meeting.setEndedAt(endedAt);
         meeting = meetingRepository.save(meeting);
 
-        liveKitService.deleteRoom(meeting.getLiveKitRoomName());
+        if (meeting.getLiveKitRoomName() != null && !meeting.getLiveKitRoomName().isBlank()) {
+            liveKitService.deleteRoom(meeting.getLiveKitRoomName());
+        }
 
         MeetingEndResponse response = meetingMapper.toEndResponse(meeting);
-        
-        // Broadcast meeting status update đến tất cả members đang xem group
         MeetingResponse updatedMeeting = meetingMapper.toResponse(meeting);
         groupWebSocketService.broadcastMeetingUpdate(meeting.getGroup().getId(), updatedMeeting);
 
@@ -446,5 +448,154 @@ public class MeetingService implements MeetingInterface {
                 .size(size)
                 .hasNext(slice.hasNext())
                 .build();
+    }
+
+    @Override
+    @Transactional
+    public MeetingResponse scheduleMeeting(ScheduleMeetingRequest request) {
+        Long currentUserId = securityUtil.getCurrentUserId();
+
+        User creator = userRepository.findById(currentUserId)
+                .orElseThrow(() -> new UserNotFoundException("Người dùng không tồn tại"));
+
+        Group group = groupRepository.findById(request.getGroupId())
+                .orElseThrow(() -> new GroupNotFoundException("Nhóm không tồn tại"));
+
+        GroupMember member = groupMemberRepository
+                .findByUserIdAndGroupId(currentUserId, request.getGroupId())
+                .orElseThrow(() -> new UserNotInGroupException("Người dùng không ở trong nhóm"));
+
+        if (!member.getIsActive()) {
+            throw new UserNotInGroupException("Người dùng không còn ở trong nhóm");
+        }
+
+        Meeting meeting = new Meeting();
+        meeting.setGroup(group);
+        meeting.setCreator(creator);
+        meeting.setScheduledStartAt(request.getScheduledStartAt());
+        meeting.setStatus(Meeting.Status.SCHEDULED);
+        meeting.setCreatorReminderSent(false);
+        meeting.setDueNotificationSent(false);
+        // Chưa tạo phòng LiveKit — null sau migrate_meeting_schedule.sql; chuỗi rỗng tương thích DB cũ NOT NULL
+        meeting.setLiveKitRoomName("");
+        meeting = meetingRepository.save(meeting);
+
+        eventPublisher.publishEvent(
+                new MeetingScheduledEvent(currentUserId, request.getGroupId(), meeting.getId())
+        );
+
+        MeetingResponse response = meetingMapper.toResponse(meeting);
+        groupWebSocketService.broadcastScheduledMeetingCreated(request.getGroupId(), response);
+
+        return response;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public SliceResponse<MeetingResponse> getScheduledMeetings(Long groupId, int page, int size) {
+        validateGroupMembership(groupId);
+
+        Pageable pageable = PageRequest.of(page, size);
+        Slice<Meeting> slice = meetingRepository.findScheduledByGroupId(groupId, pageable);
+
+        return SliceResponse.<MeetingResponse>builder()
+                .content(slice.getContent().stream()
+                        .map(meetingMapper::toResponse)
+                        .toList())
+                .page(page)
+                .size(size)
+                .hasNext(slice.hasNext())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public MeetingResponse cancelScheduledMeeting(Long meetingId) {
+        Long currentUserId = securityUtil.getCurrentUserId();
+
+        Meeting meeting = meetingRepository.findById(meetingId)
+                .orElseThrow(() -> new MeetingNotFoundException("Cuộc họp không tồn tại"));
+
+        if (meeting.getStatus() != Meeting.Status.SCHEDULED) {
+            throw new MeetingNotFoundException("Cuộc họp không ở trạng thái đã lên lịch");
+        }
+
+        if (!meeting.getCreator().getId().equals(currentUserId)) {
+            throw new UserIsNotHostMeetingException("Chỉ người tạo lịch mới có quyền hủy");
+        }
+
+        meeting.setStatus(Meeting.Status.CANCELLED);
+        meeting = meetingRepository.save(meeting);
+
+        groupWebSocketService.broadcastScheduledMeetingCancelled(
+                meeting.getGroup().getId(),
+                meeting.getId()
+        );
+
+        return meetingMapper.toResponse(meeting);
+    }
+
+    @Override
+    @Transactional
+    public MeetingResponse startScheduledMeeting(Long meetingId) {
+        Long currentUserId = securityUtil.getCurrentUserId();
+
+        Meeting meeting = meetingRepository.findById(meetingId)
+                .orElseThrow(() -> new MeetingNotFoundException("Cuộc họp không tồn tại"));
+
+        if (meeting.getStatus() != Meeting.Status.SCHEDULED) {
+            throw new MeetingNotFoundException("Cuộc họp không ở trạng thái đã lên lịch");
+        }
+
+        if (!meeting.getCreator().getId().equals(currentUserId)) {
+            throw new UserIsNotHostMeetingException("Chỉ người tạo lịch mới có quyền bắt đầu cuộc họp");
+        }
+
+        if (meeting.getScheduledStartAt() != null
+                && meeting.getScheduledStartAt().isAfter(LocalDateTime.now())) {
+            throw new MeetingNotStartedException("Chưa đến giờ bắt đầu cuộc họp");
+        }
+
+        if (participantRepository.existsActiveSessionByUserId(currentUserId)) {
+            throw new UserAlreadyInMeetingException("Người dùng đang trong một cuộc họp khác");
+        }
+
+        Long groupId = meeting.getGroup().getId();
+        String roomName = liveKitService.generateRoomName(groupId);
+
+        meeting.setLiveKitRoomName(roomName);
+        meeting.setStatus(Meeting.Status.ONGOING);
+        meeting.setStartedAt(LocalDateTime.now());
+        meeting = meetingRepository.save(meeting);
+
+        MeetingParticipant host = new MeetingParticipant();
+        host.setMeeting(meeting);
+        host.setUser(meeting.getCreator());
+        host.setLiveKitIdentity("user-" + currentUserId);
+        host.setRole(MeetingParticipant.Role.HOST);
+        host.setSessionIndex(1);
+        participantRepository.save(host);
+
+        eventPublisher.publishEvent(new NewMeetingEvent(currentUserId, groupId, meeting.getId()));
+
+        MeetingResponse response = meetingMapper.toResponse(meeting);
+        groupWebSocketService.broadcastNewMeeting(groupId, response);
+
+        return response;
+    }
+
+    private void validateGroupMembership(Long groupId) {
+        Long currentUserId = securityUtil.getCurrentUserId();
+
+        groupRepository.findById(groupId)
+                .orElseThrow(() -> new GroupNotFoundException("Nhóm không tồn tại"));
+
+        GroupMember member = groupMemberRepository
+                .findByUserIdAndGroupId(currentUserId, groupId)
+                .orElseThrow(() -> new UserNotInGroupException("Người dùng không ở trong nhóm"));
+
+        if (!member.getIsActive()) {
+            throw new UserNotInGroupException("Người dùng không còn ở trong nhóm");
+        }
     }
 }

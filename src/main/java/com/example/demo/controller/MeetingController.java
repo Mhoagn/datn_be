@@ -18,6 +18,34 @@ import org.springframework.web.bind.annotation.*;
 public class MeetingController {
     private final MeetingInterface meetingService;
 
+    @PostMapping("/schedule")
+    public ResponseEntity<MeetingResponse> scheduleMeeting(
+            @RequestBody @Valid ScheduleMeetingRequest request
+    ) {
+        MeetingResponse response = meetingService.scheduleMeeting(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/scheduled")
+    public ResponseEntity<SliceResponse<MeetingResponse>> getScheduledMeetings(
+            @RequestParam Long groupId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return ResponseEntity.ok(meetingService.getScheduledMeetings(groupId, page, size));
+    }
+
+    @DeleteMapping("/{meetingId}/schedule")
+    public ResponseEntity<MeetingResponse> cancelScheduledMeeting(@PathVariable Long meetingId) {
+        return ResponseEntity.ok(meetingService.cancelScheduledMeeting(meetingId));
+    }
+
+    @PostMapping("/{meetingId}/start")
+    public ResponseEntity<MeetingResponse> startScheduledMeeting(@PathVariable Long meetingId) {
+        MeetingResponse response = meetingService.startScheduledMeeting(meetingId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
     @PostMapping
     public ResponseEntity<MeetingResponse> createMeeting(
             @RequestBody @Valid CreateMeetingRequest request

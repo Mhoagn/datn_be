@@ -13,7 +13,9 @@ public class MeetingMapper {
                 .id(meeting.getId())
                 .groupId(meeting.getGroup().getId())
                 .createdBy(meeting.getCreator().getId())
+                .meetingTitle(meeting.getMeetingTitle())
                 .startedAt(meeting.getStartedAt())
+                .scheduledStartAt(meeting.getScheduledStartAt())
                 .status(meeting.getStatus().name())
                 .liveKitRoomName(meeting.getLiveKitRoomName())
                 .build();
