@@ -40,6 +40,9 @@ public class Meeting {
     private Boolean creatorReminderSent = false;
 
     @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private Boolean memberReminderSent = false;
+
+    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
     private Boolean dueNotificationSent = false;
     
     @Column

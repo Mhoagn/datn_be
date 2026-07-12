@@ -71,6 +71,7 @@ public class Notification {
         JOIN_REQUEST,
         MEETING_SCHEDULED,
         MEETING_REMINDER_CREATOR,
+        MEETING_REMINDER_MEMBER,
         AI_SUMMARY_READY
     }
 }

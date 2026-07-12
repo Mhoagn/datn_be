@@ -93,6 +93,21 @@ public class EmailService {
         sendEmail(toEmail, subject, content);
     }
 
+    @Async
+    public void sendMeetingMemberReminderEmail(
+            String toEmail,
+            String fullname,
+            String groupName,
+            LocalDateTime scheduledStartAt
+    ) {
+        String subject = "Nhắc nhở: Cuộc họp sắp bắt đầu trong 5 phút";
+        String content = "Xin chào " + fullname + ",\n\n" +
+                "Cuộc họp trong nhóm \"" + groupName + "\" sắp bắt đầu:\n\n" +
+                "Thời gian: " + scheduledStartAt.format(DATE_TIME_FORMATTER) + "\n\n" +
+                "Vui lòng mở ứng dụng và chuẩn bị tham gia đúng giờ.";
+        sendEmail(toEmail, subject, content);
+    }
+
     private void sendEmail(String toEmail, String subject, String textContent) {
         if (apiKey.isBlank() || fromEmail.isBlank()) {
             log.error("[Email] Bỏ qua gửi tới {} — chưa cấu hình Brevo", toEmail);

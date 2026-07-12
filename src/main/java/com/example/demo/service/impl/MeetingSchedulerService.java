@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.Meeting;
 import com.example.demo.event.MeetingCreatorReminderEvent;
+import com.example.demo.event.MeetingMemberReminderEvent;
 import com.example.demo.mapper.MeetingMapper;
 import com.example.demo.repository.MeetingRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ import java.util.List;
 @Slf4j
 public class MeetingSchedulerService {
 
-    private static final int CREATOR_REMINDER_MINUTES = 5;
+    private static final int REMINDER_MINUTES_BEFORE = 5;
 
     private final MeetingRepository meetingRepository;
     private final ApplicationEventPublisher eventPublisher;
@@ -30,7 +31,7 @@ public class MeetingSchedulerService {
     @Transactional
     public void processCreatorReminders() {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime reminderDeadline = now.plusMinutes(CREATOR_REMINDER_MINUTES);
+        LocalDateTime reminderDeadline = now.plusMinutes(REMINDER_MINUTES_BEFORE);
 
         List<Meeting> meetings = meetingRepository.findMeetingsNeedingCreatorReminder(now, reminderDeadline);
 
@@ -46,6 +47,30 @@ public class MeetingSchedulerService {
             );
 
             log.info("[MeetingSchedule] Creator reminder triggered for meeting {} at {}",
+                    meeting.getId(), meeting.getScheduledStartAt());
+        }
+    }
+
+    @Scheduled(fixedRate = 60_000)
+    @Transactional
+    public void processMemberReminders() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime reminderDeadline = now.plusMinutes(REMINDER_MINUTES_BEFORE);
+
+        List<Meeting> meetings = meetingRepository.findMeetingsNeedingMemberReminder(now, reminderDeadline);
+
+        for (Meeting meeting : meetings) {
+            Long creatorId = meeting.getCreator().getId();
+            Long groupId = meeting.getGroup().getId();
+
+            meeting.setMemberReminderSent(true);
+            meetingRepository.save(meeting);
+
+            eventPublisher.publishEvent(
+                    new MeetingMemberReminderEvent(creatorId, groupId, meeting.getId())
+            );
+
+            log.info("[MeetingSchedule] Member reminder triggered for meeting {} at {}",
                     meeting.getId(), meeting.getScheduledStartAt());
         }
     }
