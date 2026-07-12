@@ -4,6 +4,7 @@ import com.example.demo.entity.Group;
 import com.example.demo.entity.Meeting;
 import com.example.demo.entity.User;
 import com.example.demo.event.MeetingCreatorReminderEvent;
+import com.example.demo.event.MeetingMemberReminderEvent;
 import com.example.demo.event.MeetingScheduledEvent;
 import com.example.demo.repository.GroupMemberRepository;
 import com.example.demo.repository.GroupRepository;
@@ -82,5 +83,37 @@ public class MeetingScheduleEmailListener {
         );
 
         log.info("[MeetingSchedule] Sent creator reminder email for meeting {}", meeting.getId());
+    }
+
+    @Async
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    public void handleMemberReminder(MeetingMemberReminderEvent event) {
+        Meeting meeting = meetingRepository.findById(event.getReferenceId()).orElse(null);
+        if (meeting == null) {
+            return;
+        }
+
+        Group group = groupRepository.findById(event.getGroupId()).orElse(null);
+        if (group == null) {
+            return;
+        }
+
+        Long creatorId = event.getActorId();
+        List<User> members = groupMemberRepository.findActiveUsersByGroupId(event.getGroupId());
+
+        for (User member : members) {
+            if (member.getId().equals(creatorId)) {
+                continue;
+            }
+            emailService.sendMeetingMemberReminderEmail(
+                    member.getEmail(),
+                    member.getFullname(),
+                    group.getGroupName(),
+                    meeting.getScheduledStartAt()
+            );
+        }
+
+        log.info("[MeetingSchedule] Sent member reminder emails for meeting {} to {} members",
+                meeting.getId(), members.size() - 1);
     }
 }

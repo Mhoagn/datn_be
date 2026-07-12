@@ -43,6 +43,18 @@ public interface MeetingRepository extends JpaRepository<Meeting, Long> {
     @Query("""
         SELECT m FROM Meeting m
         WHERE m.status = 'SCHEDULED'
+          AND m.memberReminderSent = false
+          AND m.scheduledStartAt > :now
+          AND m.scheduledStartAt <= :reminderDeadline
+    """)
+    List<Meeting> findMeetingsNeedingMemberReminder(
+            @Param("now") LocalDateTime now,
+            @Param("reminderDeadline") LocalDateTime reminderDeadline
+    );
+
+    @Query("""
+        SELECT m FROM Meeting m
+        WHERE m.status = 'SCHEDULED'
           AND m.dueNotificationSent = false
           AND m.scheduledStartAt <= :now
     """)

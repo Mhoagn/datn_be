@@ -77,4 +77,14 @@ public class NotificationEventListener {
             log.error("Failed to dispatch MEETING_REMINDER_CREATOR notification: {}", e.getMessage(), e);
         }
     }
+
+    @Async
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    public void handleMeetingMemberReminder(MeetingMemberReminderEvent event) {
+        try {
+            notificationDispatcher.dispatch(Notification.Type.MEETING_REMINDER_MEMBER, event);
+        } catch (Exception e) {
+            log.error("Failed to dispatch MEETING_REMINDER_MEMBER notification: {}", e.getMessage(), e);
+        }
+    }
 }
