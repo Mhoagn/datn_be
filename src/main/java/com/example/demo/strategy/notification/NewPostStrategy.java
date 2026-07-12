@@ -23,7 +23,7 @@ public class NewPostStrategy implements NotificationStrategy {
     @Override
     public List<Long> resolveRecipients(NotificationEvent event) {
         return groupMemberRepository
-                .findUserIdsByGroupId(event.getGroupId())
+                .findActiveUserIdsByGroupId(event.getGroupId())
                 .stream()
                 .filter(uid -> !uid.equals(event.getActorId())) // loại actor
                 .collect(Collectors.toList());
