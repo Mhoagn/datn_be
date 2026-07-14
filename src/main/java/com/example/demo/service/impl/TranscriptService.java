@@ -20,7 +20,9 @@ import com.example.demo.dto.SummaryDTO.SummaryResponse;
 import com.example.demo.event.AiSummaryReadyEvent;
 import com.example.demo.event.NewSummaryEvent;
 import com.example.demo.exception.FinalSummaryNotFoundException;
+import com.example.demo.exception.InvalidRequestException;
 import com.example.demo.exception.MeetingRecordNotFoundException;
+import com.example.demo.exception.TranscriptAlreadyProcessingException;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.service.interf.TranscriptInterface;
 import com.example.demo.util.SecurityUtil;
@@ -29,7 +31,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Lazy;
 
 @Service
 @RequiredArgsConstructor
@@ -48,6 +52,14 @@ public class TranscriptService implements TranscriptInterface {
     private final SecurityUtil securityUtil;
     private final ApplicationEventPublisher eventPublisher;
 
+    /** Proxy của chính bean này để gọi @Async qua Spring proxy (tránh self-invocation). */
+    private TranscriptService self;
+
+    @Autowired
+    public void setSelf(@Lazy TranscriptService self) {
+        this.self = self;
+    }
+
     @Value("${livekit.s3.bucket}")
     private String s3Bucket;
 
@@ -61,59 +73,87 @@ public class TranscriptService implements TranscriptInterface {
     private String awsSecretKey;
 
     /**
-     * Xử lý video sau khi record hoàn tất.
+     * Validate + khởi tạo trạng thái PROCESSING (đồng bộ).
+     * Phần gọi AI + poll chạy bất đồng bộ sau khi các check này đã OK.
      *
-     * Sử dụng Async Job Pattern để tránh lỗi ngrok ERR_NGROK_3004:
-     *  - Gọi POST /start-video-processing → nhận job_id ngay lập tức (< 1 giây)
-     *  - Poll GET /job-status/{job_id} mỗi 20 giây cho đến khi completed/failed
-     *
-     * Không đánh @Transactional ở đây vì method có thể chạy tới 40 phút
+     * Không đánh @Transactional ở đây vì phần async có thể chạy tới 40 phút
      * (giữ transaction mở lâu sẽ gây leak DB connection).
      * Mỗi thao tác DB được bọc trong @Transactional riêng ở các helper method.
      */
     @Override
-    @Async
     public void processRecordedVideo(Long recordId, Long currentUserId, Integer numPoints) {
         log.info("Bắt đầu xử lý video cho record ID: {}", recordId);
 
-        // 1. Lấy thông tin record
         MeetingRecord record = meetingRecordRepository.findById(recordId)
                 .orElseThrow(() -> new MeetingRecordNotFoundException("Record không tồn tại"));
 
-        // 1.1. Validate s3Key
         if (record.getS3Key() == null || record.getS3Key().trim().isEmpty()) {
-            log.error("Record ID {} chưa có s3Key. Video có thể chưa upload lên S3.", recordId);
-            return;
+            throw new InvalidRequestException(
+                    "Video chưa sẵn sàng (chưa có s3Key). Vui lòng đợi upload hoàn tất.");
         }
 
-        // 1.2. Validate record status
         if (record.getStatus() != MeetingRecord.Status.COMPLETED) {
-            log.error("Record ID {} chưa COMPLETED. Status hiện tại: {}", recordId, record.getStatus());
-            return;
+            throw new InvalidRequestException(
+                    "Bản ghi chưa hoàn tất. Status hiện tại: " + record.getStatus());
         }
 
-        User creator = userRepository.findById(currentUserId)
+        userRepository.findById(currentUserId)
                 .orElseThrow(() -> new UserNotFoundException("Người dùng không tồn tại"));
 
         Long groupId = meetingRecordRepository.findGroupIdByMeetingRecordId(recordId);
 
-        GroupMember findMember = groupMemberRepository
+        groupMemberRepository
                 .findByUserIdAndGroupId(currentUserId, groupId)
                 .orElseThrow(() -> new UserNotInGroupException("Người dùng không ở trong nhóm"));
 
-        // 2. Khởi tạo hoặc reset MeetingTranscript → PROCESSING
-        MeetingTranscript transcript = initOrResetTranscript(recordId, record);
-        if (transcript == null) {
-            return; // đã COMPLETED hoặc đang PROCESSING bởi thread khác
+        MeetingTranscript existingTranscript = transcriptRepository.findByMeetingRecordId(recordId).orElse(null);
+        if (existingTranscript != null) {
+            if (existingTranscript.getStatus() == MeetingTranscript.Status.PROCESSING) {
+                throw new TranscriptAlreadyProcessingException(
+                        "Bản ghi đang được xử lý bởi hệ thống.");
+            }
+            if (existingTranscript.getStatus() == MeetingTranscript.Status.COMPLETED) {
+                throw new InvalidRequestException(
+                        "Transcript đã được xử lý thành công. Không cần chạy lại.");
+            }
         }
 
-        // 3. Khởi tạo hoặc reset MeetingSummaryCandidate → PROCESSING
+        MeetingTranscript transcript = initOrResetTranscript(recordId, record);
+        if (transcript == null) {
+            throw new TranscriptAlreadyProcessingException(
+                    "Bản ghi đang được xử lý bởi hệ thống.");
+        }
+
         MeetingSummaryCandidate summaryCandidate = initOrResetSummaryCandidate(recordId, transcript, record);
         if (summaryCandidate == null) {
+            throw new TranscriptAlreadyProcessingException(
+                    "Bản ghi đang được xử lý bởi hệ thống.");
+        }
+
+        // Chỉ trả "processing" khi đã sẵn sàng; phần AI chạy async sau đó
+        self.executeAiProcessingAsync(
+                recordId, currentUserId, groupId, numPoints, transcript.getId(), summaryCandidate.getId());
+    }
+
+    /**
+     * Chạy nền: gửi job AI + poll kết quả (tối đa 40 phút).
+     */
+    @Async
+    public void executeAiProcessingAsync(Long recordId,
+                                         Long currentUserId,
+                                         Long groupId,
+                                         Integer numPoints,
+                                         Long transcriptId,
+                                         Long summaryCandidateId) {
+        MeetingTranscript transcript = transcriptRepository.findById(transcriptId).orElse(null);
+        MeetingSummaryCandidate summaryCandidate = summaryCandidateRepository.findById(summaryCandidateId).orElse(null);
+        MeetingRecord record = meetingRecordRepository.findById(recordId).orElse(null);
+
+        if (transcript == null || summaryCandidate == null || record == null) {
+            log.error("Không tìm thấy dữ liệu để chạy AI cho record ID: {}", recordId);
             return;
         }
 
-        // 4. Gửi job lên AI-service (trả về job_id ngay, không giữ connection lâu)
         String jobId;
         try {
             log.info("Gửi job xử lý video lên AI-service (async job pattern)...");
@@ -124,7 +164,6 @@ public class TranscriptService implements TranscriptInterface {
             jobId = jobStart.getJobId();
             log.info("AI-service đã nhận job, job_id = {}", jobId);
 
-            // Ghi tạm job_id vào errorMessage để dễ debug khi backend restart
             transcript.setErrorMessage("PROCESSING:job_id=" + jobId);
             transcriptRepository.save(transcript);
 
@@ -134,9 +173,8 @@ public class TranscriptService implements TranscriptInterface {
             return;
         }
 
-        // 5. Poll cho đến khi job hoàn thành (tối đa 40 phút)
-        final int POLL_INTERVAL_MS = 20_000; // 20 giây
-        final int MAX_ATTEMPTS = 120;        // 120 × 20s = 40 phút
+        final int POLL_INTERVAL_MS = 20_000;
+        final int MAX_ATTEMPTS = 120;
         AIServiceResponse aiResponse = null;
 
         for (int attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
@@ -159,14 +197,12 @@ public class TranscriptService implements TranscriptInterface {
                 } else if ("failed".equals(jobStatus.getStatus())) {
                     throw new RuntimeException("AI-service xử lý thất bại: " + jobStatus.getError());
                 }
-                // status == "processing" → tiếp tục poll
 
             } catch (RuntimeException re) {
                 log.error("Lỗi khi poll job {}: {}", jobId, re.getMessage(), re);
                 markFailed(transcript, summaryCandidate, re.getMessage());
                 return;
             } catch (Exception e) {
-                // Lỗi tạm thời (network flap, ngrok restart...) → thử lại lần sau
                 log.warn("Lỗi tạm thời khi poll job {} (lần {}): {}", jobId, attempt, e.getMessage());
             }
         }
@@ -177,7 +213,6 @@ public class TranscriptService implements TranscriptInterface {
             return;
         }
 
-        // 6. Lưu kết quả vào DB
         try {
             if (!"success".equals(aiResponse.getStatus())) {
                 throw new RuntimeException("AI service trả về status không thành công");

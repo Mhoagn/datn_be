@@ -97,6 +97,9 @@ public class TranscriptController {
     /**
      * Trigger xử lý AI cho một meeting record (manual trigger hoặc retry)
      * POST /transcripts/record/{recordId}/process
+     *
+     * Chỉ trả 202 khi validate OK và đã nhận job async.
+     * Các lỗi validate (thiếu s3Key, đang PROCESSING, ...) sẽ ném exception → 4xx.
      */
     @PostMapping("/record/{recordId}/process")
     public ResponseEntity<Map<String, String>> triggerProcessing(
