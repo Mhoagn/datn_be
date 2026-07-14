@@ -438,9 +438,37 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
+    @ExceptionHandler(TranscriptAlreadyProcessingException.class)
+    public ResponseEntity<ErrorResponse> handleTranscriptAlreadyProcessing(
+            TranscriptAlreadyProcessingException ex,
+            HttpServletRequest request
+    ) {
+        ErrorResponse error = ErrorResponse.builder()
+                .message(ex.getMessage())
+                .status(HttpStatus.CONFLICT.value())
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
     @ExceptionHandler(RecordNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleRecordNotFound(
             RecordNotFoundException ex,
+            HttpServletRequest request
+    ) {
+        ErrorResponse error = ErrorResponse.builder()
+                .message(ex.getMessage())
+                .status(HttpStatus.NOT_FOUND.value())
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(MeetingRecordNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleMeetingRecordNotFound(
+            MeetingRecordNotFoundException ex,
             HttpServletRequest request
     ) {
         ErrorResponse error = ErrorResponse.builder()
