@@ -99,7 +99,8 @@ public class LiveKitService {
     // ===================== EGRESS =====================
 
     /**
-     * Bắt đầu record room → lưu vào S3
+     * Bắt đầu record room → upload trực tiếp lên S3 (bucket private vẫn OK
+     * vì LiveKit dùng access/secret key để PutObject, không cần public ACL).
      * @return egressId để dùng khi stop
      */
     public String startRecord(String roomName, String fileName) {

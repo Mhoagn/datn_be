@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.MeetingDTO.*;
 import com.example.demo.dto.MeetingRecordDTO.RecordListResponse;
+import com.example.demo.dto.MeetingRecordDTO.RecordPlayUrlResponse;
 import com.example.demo.dto.MeetingRecordDTO.RecordResponse;
 import com.example.demo.dto.MeetingRecordDTO.RecordStopResponse;
 import com.example.demo.dto.SliceResponse;
@@ -100,5 +101,13 @@ public class MeetingController {
     ) {
         SliceResponse<RecordListResponse> response = meetingService.getRecordsByGroupId(groupId, page, size);
         return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Lấy URL tạm (presigned) để xem bản ghi trên S3 private.
+     */
+    @GetMapping("/records/{recordId}/play-url")
+    public ResponseEntity<RecordPlayUrlResponse> getRecordPlayUrl(@PathVariable Long recordId) {
+        return ResponseEntity.ok(meetingService.getRecordPlayUrl(recordId));
     }
 }

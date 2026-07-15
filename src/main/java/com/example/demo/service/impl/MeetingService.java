@@ -11,9 +11,11 @@ import com.example.demo.exception.*;
 import com.example.demo.mapper.MeetingMapper;
 import com.example.demo.mapper.MeetingRecordMapper;
 import com.example.demo.repository.*;
+import com.example.demo.service.S3PresignService;
 import com.example.demo.service.interf.MeetingInterface;
 import com.example.demo.service.interf.TranscriptInterface;
 import com.example.demo.util.SecurityUtil;
+import com.example.demo.dto.MeetingRecordDTO.RecordPlayUrlResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,6 +48,7 @@ public class MeetingService implements MeetingInterface {
     private final ApplicationEventPublisher eventPublisher;
     private final TranscriptInterface transcriptService;
     private final GroupWebSocketService groupWebSocketService;
+    private final S3PresignService s3PresignService;
 
     @Value("${livekit.s3.bucket}")
     private String s3Bucket;
@@ -447,6 +450,47 @@ public class MeetingService implements MeetingInterface {
                 .page(page)
                 .size(size)
                 .hasNext(slice.hasNext())
+                .build();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public RecordPlayUrlResponse getRecordPlayUrl(Long recordId) {
+        Long currentUserId = securityUtil.getCurrentUserId();
+
+        MeetingRecord record = meetingRecordRepository.findById(recordId)
+                .orElseThrow(() -> new RecordNotFoundException("Không tìm thấy bản ghi"));
+
+        if (record.getStatus() != MeetingRecord.Status.COMPLETED) {
+            throw new RecordNotFoundException("Bản ghi chưa sẵn sàng để xem");
+        }
+
+        String s3Key = record.getS3Key() != null ? record.getS3Key() : record.getFileName();
+        String bucket = record.getS3Bucket() != null ? record.getS3Bucket() : s3Bucket;
+
+        if (s3Key == null || s3Key.isBlank() || bucket == null || bucket.isBlank()) {
+            throw new RecordNotFoundException("Bản ghi chưa có file trên S3");
+        }
+
+        Long groupId = meetingRecordRepository.findGroupIdByMeetingRecordId(recordId);
+        if (groupId == null) {
+            throw new RecordNotFoundException("Không tìm thấy nhóm của bản ghi");
+        }
+
+        GroupMember member = groupMemberRepository
+                .findByUserIdAndGroupId(currentUserId, groupId)
+                .orElseThrow(() -> new UserNotInGroupException("Người dùng không ở trong nhóm"));
+
+        if (!member.getIsActive()) {
+            throw new UserNotInGroupException("Người dùng không còn ở trong nhóm");
+        }
+
+        String playUrl = s3PresignService.createGetObjectUrl(bucket, s3Key);
+
+        return RecordPlayUrlResponse.builder()
+                .recordId(recordId)
+                .playUrl(playUrl)
+                .expiresInMinutes(s3PresignService.getPresignTtlMinutes())
                 .build();
     }
 
