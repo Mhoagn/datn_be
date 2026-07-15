@@ -132,12 +132,12 @@ CREATE TABLE `Post_Likes`(
 CREATE TABLE `Meetings`(
     `id`                BIGINT                         NOT NULL AUTO_INCREMENT,
     `group_id`          BIGINT                         NOT NULL,
-    `meeting_title`     VARCHAR(255)                   NULL,
     `created_by`        BIGINT                         NOT NULL,
     `started_at`        TIMESTAMP                      NULL,
     `ended_at`          TIMESTAMP                      NULL,
     `scheduled_start_at` TIMESTAMP                     NULL,
     `creator_reminder_sent` TINYINT(1)                 NOT NULL DEFAULT 0,
+    `member_reminder_sent` TINYINT(1)                 NOT NULL DEFAULT 0,
     `due_notification_sent` TINYINT(1)                  NOT NULL DEFAULT 0,
     `status`            ENUM('SCHEDULED', 'ONGOING', 'END', 'CANCELLED') NOT NULL DEFAULT 'ONGOING',
     `livekit_room_name` VARCHAR(255)                   NULL,

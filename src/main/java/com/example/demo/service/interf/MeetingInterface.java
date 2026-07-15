@@ -2,6 +2,7 @@ package com.example.demo.service.interf;
 
 import com.example.demo.dto.MeetingDTO.*;
 import com.example.demo.dto.MeetingRecordDTO.RecordListResponse;
+import com.example.demo.dto.MeetingRecordDTO.RecordPlayUrlResponse;
 import com.example.demo.dto.MeetingRecordDTO.RecordResponse;
 import com.example.demo.dto.MeetingRecordDTO.RecordStopResponse;
 import com.example.demo.dto.SliceResponse;
@@ -19,4 +20,5 @@ public interface MeetingInterface {
     RecordResponse startRecord(Long meetingId);
     RecordStopResponse stopRecord(Long meetingId);
     SliceResponse<RecordListResponse> getRecordsByGroupId(Long groupId, int page, int size);
+    RecordPlayUrlResponse getRecordPlayUrl(Long recordId);
 }
