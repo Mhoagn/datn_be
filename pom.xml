@@ -122,6 +122,13 @@
 		<version>2.29.45</version>
 	</dependency>
 
+	<!-- Bucket4j + Redis (Lettuce) rate limiting -->
+	<dependency>
+		<groupId>com.bucket4j</groupId>
+		<artifactId>bucket4j_jdk17-lettuce</artifactId>
+		<version>8.14.0</version>
+	</dependency>
+
 	<!-- Jackson for JSON processing -->
 	<dependency>
 		<groupId>com.fasterxml.jackson.core</groupId>
