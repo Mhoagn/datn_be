@@ -55,4 +55,11 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> 
 
     @Query("SELECT gm.user FROM GroupMember gm WHERE gm.group.id = :groupId AND gm.isActive = true")
     List<User> findActiveUsersByGroupId(@Param("groupId") Long groupId);
+
+    @Query(
+            value = "SELECT gm.user_id FROM group_members gm where gm.user_id not in (SELECT user_id FROM meeting_participants where meeting_id = :meetingId) " +
+                    "and gm.is_active = true and gm.group_id = :groupId",
+            nativeQuery = true
+    )
+    List<Long> findNotInMeetingMember(@Param("meetingId") Long meetingId, @Param("groupId") Long groupId);
 }

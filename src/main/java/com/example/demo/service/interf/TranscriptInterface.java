@@ -4,6 +4,7 @@ import com.example.demo.dto.SummaryDTO.FinalSummaryResponse;
 import com.example.demo.dto.SummaryDTO.SaveFinalSummaryRequest;
 import com.example.demo.dto.SummaryDTO.SummaryPointDTO;
 import com.example.demo.dto.SummaryDTO.SummaryResponse;
+import com.example.demo.dto.TranscriptDTO.FulltextResponse;
 import com.example.demo.dto.TranscriptDTO.TranscriptResponse;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface TranscriptInterface {
     FinalSummaryResponse saveFinalSummary(SaveFinalSummaryRequest request);
 
     FinalSummaryResponse getFinalSummary(Long recordId);
+
+    FulltextResponse getFullText(Long record);
 }

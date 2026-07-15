@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import com.example.demo.dto.TranscriptDTO.*;
 import com.example.demo.entity.*;
-import com.example.demo.exception.UserNotInGroupException;
+import com.example.demo.exception.*;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -19,11 +19,6 @@ import com.example.demo.dto.SummaryDTO.SummaryPointDTO;
 import com.example.demo.dto.SummaryDTO.SummaryResponse;
 import com.example.demo.event.AiSummaryReadyEvent;
 import com.example.demo.event.NewSummaryEvent;
-import com.example.demo.exception.FinalSummaryNotFoundException;
-import com.example.demo.exception.InvalidRequestException;
-import com.example.demo.exception.MeetingRecordNotFoundException;
-import com.example.demo.exception.TranscriptAlreadyProcessingException;
-import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.service.interf.TranscriptInterface;
 import com.example.demo.util.SecurityUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -489,6 +484,19 @@ public class TranscriptService implements TranscriptInterface {
                 finalSummary.getSelectedPointIds(),
                 finalSummary.getCreatedAt(),
                 finalSummary.getUpdatedAt());
+    }
+
+    @Override
+    public FulltextResponse getFullText(Long recordId) {
+        Long currentUserId = securityUtil.getCurrentUserId();
+        MeetingRecord meetingRecord = meetingRecordRepository.findById(recordId)
+                .orElseThrow(() -> new RecordNotFoundException("Không tìm thấy record"));
+
+        MeetingTranscript meetingTranscript = transcriptRepository.findByMeetingRecordId(recordId)
+                .orElseThrow(() -> new RecordNotFoundException("Không tim thấy record"));
+        FulltextResponse fulltextResponse = new FulltextResponse();
+        fulltextResponse.setFullText(meetingTranscript.getFullText());
+        return fulltextResponse;
     }
 
     // =========================================================

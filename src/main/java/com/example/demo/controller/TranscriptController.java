@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.SummaryDTO.*;
+import com.example.demo.dto.TranscriptDTO.FulltextResponse;
 import com.example.demo.dto.TranscriptDTO.TranscriptResponse;
 import com.example.demo.service.interf.TranscriptInterface;
 import jakarta.validation.Valid;
@@ -111,5 +112,11 @@ public class TranscriptController {
             "status", "processing",
             "message", "Đã khởi tạo xử lý AI cho bản ghi. Vui lòng đợi vài phút."
         ));
+    }
+
+    @GetMapping("/record/{recordId}/fulltext")
+    public ResponseEntity<FulltextResponse> getFullTextResponse(@PathVariable Long recordId) {
+        FulltextResponse fulltextResponse = transcriptService.getFullText(recordId);
+        return ResponseEntity.ok(fulltextResponse);
     }
 }
